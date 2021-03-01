@@ -13,7 +13,9 @@
 <body>
 
 <header>
+	<nav>
 	{% block nav %}
+		<div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div>
 		<ul>
 			<li><a href="#">lien 1</a></li>
 			<li><a href="#">lien 2</a></li>
@@ -22,6 +24,7 @@
 			<li><a href="#">lien 5</a></li>
 		</ul>
 	{% endblock %}
+	</nav>
 </header>
 
 <main>
@@ -32,7 +35,7 @@
 </main>
 
 <footer class="footerStyle">
-	©Uswap {{ "now" | date("Y") }}
+	©Uswap | {{ "now" | date("Y") }}
 </footer>
 
 {% block js %}

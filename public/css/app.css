@@ -1,5 +1,16 @@
 /*=============================================*/
-/*        reset css*/
+/*        FONTS                                */
+/*=============================================*/
+@font-face {
+    font-family: poppins;
+    src: url("../fonts/Poppins-Regular.otf");
+}
+@font-face {
+    font-family: quicksand;
+    src: url("../fonts/Quicksand-Regular.otf");
+}
+/*=============================================*/
+/*        RESET CSS                            */
 /*=============================================*/
 html, body, div, span, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -22,8 +33,73 @@ footer, header, nav
     box-sizing: border-box;
 }
 
+h1 {
+    font-family: quicksand, sans-serif;
+    color: #23032d;
+}
+div.h1-style {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    margin: 2em 0 1em 0;
+}
+div.h1-underline {
+    height: 2px;
+    width: 50%;
+    margin: 0 auto;
+    background: linear-gradient(to right,#f1da5c, #23032d, #f1da5c);
+}
+div.example-wrapper {
+    width: 50%;
+}
+
 body {
-    background-color: darkseagreen;
+    font-family: poppins, sans-serif;
+    letter-spacing: .1em;
+    background-color: #f1da5c;
+}
+nav {
+    background-color: #111111;
+    color: #dfdfdf;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+nav .nav-logo {
+    background-color: #999999;
+    border-radius: 50%;
+    padding: .5em .7em;
+}
+nav .nav-logo img {
+    width: 3em;
+}
+nav>ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 1em;
+}
+nav>ul>li {
+    /*display: inline-block;*/
+    margin-right: 1em;
+}
+nav>ul>li>a {
+    transition: .5s;
+    padding: .5em 1em;
+    border-radius: .3em;
+}
+nav>ul>li>a:hover {
+    transition: .15s;
+    background-color: #23032d;
+    color: #f1da5c;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 footer.footerStyle {

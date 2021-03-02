@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Inscription!{% endblock %}
+
+{% block body %}
+{% block main %}
+
+<div class="example-wrapper">
+        {{ form_start(form) }}
+        {{ form_row(form.pseudo) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.paswword.second) }}
+        <button type="submit">Enregistrer</button>
+        <button><a href="{{ path('accueil') }}"></a>Annuler</button>
+    {{ form_end(form) }}
+
+</div>
+    {% endblock % }}
+{% endblock %}

@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserType extends AbstractType
+class userType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,10 +26,10 @@ class UserType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => User::class,
-        ));
-    }
+//    public function configureOptions(OptionsResolver $resolver)
+//    {
+//        $resolver->setDefaults(array(
+//            'data_class' => User::class,
+//        ));
+//    }
 }

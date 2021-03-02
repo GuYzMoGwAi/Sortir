@@ -2,7 +2,11 @@
 
 {% block title %} Inscription!{% endblock %}
 
-{% block body %}
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+{% endblock %}
+
 {% block main %}
 
 <div class="example-wrapper">
@@ -19,5 +23,5 @@
     {{ form_end(form) }}
 
 </div>
-    {% endblock % }}
+
 {% endblock %}

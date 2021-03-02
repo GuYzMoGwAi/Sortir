@@ -14,14 +14,14 @@
 
 	<nav>
 		{% block nav %}
-			<div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div>
+			<a href="{{ path('accueil') }}"><div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div></a>
 
 {#		{% if not app.user %}#}
 {#			<p>Vous n'êtes pas connecté :(</p>#}
 {#		{% endif %}#}
 			<ul>
-				<li><a href="#">S'inscrire</a></li>
 		{% if app.user %}
+				<li><a href="{{ path('accueil') }}">Accueil</a></li>
 			{# <a href="{{ path('deconnexion') }}">Se déconnecter</a> ({{ app.user.username }}) #}
 				<li><a href="#">Se déconnecter</a></li>
 		{% else %}

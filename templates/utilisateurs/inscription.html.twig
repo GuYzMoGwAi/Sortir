@@ -9,19 +9,39 @@
 
 {% block main %}
 
-<div class="example-wrapper">
-    {{ form_start(form) }}
-        {{ form_row(form.pseudo) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.phone) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password.first) }}
-        {{ form_row(form.paswword.second) }}
-        <button type="submit">Enregistrer</button>
-        <button><a href="{{ path('accueil') }}"></a>Annuler</button>
-    {{ form_end(form) }}
+    <form action="/{{ path('inscription') }}" method="post">
+        <div>
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" id="name" name="user_pseudo">
+        </div>
+        <div>
+            <label for="username">Prenom :</label>
+            <input type="text" id="name" name="user_username">
+        </div>
+        <div>
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="user_name">
+        </div>
+        <div>
+            <label for="phone">Téléphone :</label>
+            <input type="email" id="mail" name="user_phone">
+        </div>
+        <div>
+            <label for="mail">Mail :</label>
+            <input type="email" id="mail" name="user_mail">
+        </div>
+        <div>
+            <label for="passwordFirst">Mot de passe :</label>
+            <input type="email" id="mail" name="user_passwordFirst">
+        </div>
+        <div>
+            <label for="passwordSecond">confirmation mot de passe :</label>
+            <input type="email" id="mail" name="user_passwordSecond">
+        </div>
 
-</div>
+        <button type="submit">S'enregistrer</button>
+        <button><a href="{{ path('entree') }}">Annuler</a></button>
+
+    </form>
 
 {% endblock %}

@@ -47,7 +47,7 @@ div.h1-underline {
     height: 2px;
     width: 50%;
     margin: 0 auto;
-    background: linear-gradient(to right,#f1da5c, #23032d, #f1da5c);
+    background: linear-gradient(to right,#cacaca, #23032d, #cacaca);
 }
 div.example-wrapper {
     width: 50%;
@@ -56,10 +56,11 @@ div.example-wrapper {
 body {
     font-family: poppins, sans-serif;
     letter-spacing: .1em;
-    background-color: #f1da5c;
+    /*background-color: #f1da5c;*/
+    background-color: #cacaca;
 }
 nav {
-    background-color: #111111;
+    background-color: #222222;
     color: #dfdfdf;
     display: flex;
     flex-flow: row wrap;
@@ -103,7 +104,7 @@ a {
 }
 
 footer.footerStyle {
-    background-color: #111111;
+    background-color: #222222;
     color: #eeeeee;
     text-align: center;
     padding: 2em 0 4em 0;

@@ -11,10 +11,23 @@ class AccueilController extends AbstractController
     /**
      * @Route("/accueil", name="accueil")
      */
-    public function index(): Response
+    public function accueil(): Response
     {
         return $this->render('accueil/accueil.html.twig', [
-            'controller_name' => 'AccueilController',
+            '1' => [
+                'nom' => 'Au grand air',
+                'date' => '28/06/2021',
+                'cloture' => '21/06/2021',
+                'inscrits' => 8,
+                'places' => 10,
+                'etat' => 'En cours',
+                'inscrit' => true,
+                'organisateur' => 'John Orga',
+                'action' => [
+                    'inscription' => false,
+                    'desister' => true,
+                ],
+            ],
         ]);
     }
 }

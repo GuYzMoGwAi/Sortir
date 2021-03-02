@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+	{% block css %}
+		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+	{% endblock %}
+
+
+{% block main %}
+	<div class="h1-container">
+		<div class="h1-style">
+			<h1>Bienvenue</h1>
+			<div class="h1-underline"></div>
+		</div>
+	</div>
+	<div class="accueil-presentation">
+		<div class="presentation-images"></div>
+		<div class="presentation-text">
+			Sortir.com est un site de
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores at quod ratione veniam.
+				Accusamus cum debitis, excepturi itaque iure libero maiores obcaecati sapiente sed sequi similique sit
+				voluptate voluptatum!</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores at quod ratione veniam.
+				Accusamus cum debitis, excepturi itaque iure libero maiores obcaecati sapiente sed sequi similique sit
+				voluptate voluptatum!</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores at quod ratione veniam.
+				Accusamus cum debitis, excepturi itaque iure libero maiores obcaecati sapiente sed sequi similique sit
+				voluptate voluptatum!</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores at quod ratione veniam.
+				Accusamus cum debitis, excepturi itaque iure libero maiores obcaecati sapiente sed sequi similique sit
+				voluptate voluptatum!</p>
+		</div>
+	</div>
+{% endblock %}

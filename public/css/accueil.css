@@ -1,0 +1,12 @@
+/*=============================================*/
+/*        PAGE ACCUEIL                         */
+/*=============================================*/
+div.presentation-text {
+    max-width: 60em;
+    margin-left: 2em;
+}
+footer.footerStyle {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

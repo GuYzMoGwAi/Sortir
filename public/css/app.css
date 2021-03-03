@@ -39,6 +39,9 @@ body {
     background-color: #cacaca;
     color: #121212;
 }
+main {
+    min-height: 60vh;
+}
 h1 {
     font-family: quicksand, sans-serif;
     color: #23032d;
@@ -109,12 +112,27 @@ a {
     text-decoration: none;
     color: inherit;
 }
-
+/*=============================================*/
+/*        AUTRE                                */
+/*=============================================*/
+.user-name {
+    font-size: .8em;
+    text-align: right;
+    margin-right: .5em;
+    color: rgba(35,3,45,.8);
+}
+/*=============================================*/
+/*        FOOTER                               */
+/*=============================================*/
 footer.footerStyle {
     letter-spacing: .1em;
     background-color: #222222;
     color: #eeeeee;
     text-align: center;
     padding: 2em 0 4em 0;
+    /* //--// A voir ...*/
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 

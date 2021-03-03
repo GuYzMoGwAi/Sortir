@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+	{% block css %}
+		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+	{% endblock %}
+
+{% block main %}
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert-error" role="alert">{{ flashError }}</div>
+	{% endfor %}
+
+	<div class="h1-container">
+		<div class="h1-style">
+			<h1>Connexion</h1>
+			<div class="h1-underline"></div>
+		</div>
+	</div>
+
+	<form method="post">
+
+		{% if error %}
+			<div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
+
+		<label for="pseudo">pseudo</label>
+		<input type="text" value="{{ last_username }}" name="pseudo" id="pseudo" class="form-control" required
+			   autofocus>
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password" class="form-control" required>
+
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+
+		<button class="button-validate" type="submit">Valider</button>
+	</form>
+
+{% endblock %}

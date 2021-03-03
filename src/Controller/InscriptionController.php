@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InscriptionController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="inscription")
+     * @Route("/inscriptionXXX", name="inscription")
      * @param Request $request
      * @return RedirectResponse|Response
      */

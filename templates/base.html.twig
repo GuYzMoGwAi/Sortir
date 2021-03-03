@@ -3,9 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{% block title %}Sortir !{% endblock %}</title>
-	{% block css %}
-		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-	{% endblock %}
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	{% block css %}{% endblock %}
 </head>
 
 <body>
@@ -14,25 +13,31 @@
 
 	<nav>
 		{% block nav %}
-			<a href="{{ path('accueil') }}"><div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div></a>
+			<a href="{{ path('accueil') }}">
+				<div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div>
+			</a>
 
-{#		{% if not app.user %}#}
-{#			<p>Vous n'êtes pas connecté :(</p>#}
-{#		{% endif %}#}
+			{# {% if not app.user %} #}
+			{# <p>Vous n'êtes pas connecté :(</p> #}
+			{# {% endif %} #}
 			<ul>
-		{% if app.user %}
-				<li><a href="{{ path('accueil') }}">Accueil</a></li>
-			{# <a href="{{ path('deconnexion') }}">Se déconnecter</a> ({{ app.user.username }}) #}
-				<li><a href="#">Se déconnecter</a></li>
-		{% else %}
-				<li><a href="{{ path('inscription') }}">S'inscrire</a></li>
-				<li><a href="#">Se connecter</a></li>
-			{# <a href="{{ path('inscription') }}">S'enregistrer</a> #}
-			{# <a href="{{ path('connexion') }}">Se connecter</a> #}
-		{% endif %}
+				{% if app.user %}
+					<li><a href="{{ path('accueil') }}">Accueil</a></li>
+					{# <a href="{{ path('deconnexion') }}">Se déconnecter</a> ({{ app.user.username }}) #}
+					<li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+				{% else %}
+					<li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+					<li><a href="{{ path('app_login') }}">Se connecter</a></li>
+					{# <a href="{{ path('inscription') }}">S'enregistrer</a> #}
+					{# <a href="{{ path('connexion') }}">Se connecter</a> #}
+				{% endif %}
 			</ul>
 		{% endblock %}
 	</nav>
+
+	{% if app.user %}
+		<p class="user-name">Bienvenue, {{ app.user.username }}</p>
+	{% endif %}
 </header>
 
 <main>

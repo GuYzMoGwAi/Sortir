@@ -2,24 +2,42 @@
 
 {% block title %}Register{% endblock %}
 
+{% block css %}
+	<link rel="stylesheet" href="{{ asset('css/inscription.css') }}">
+{% endblock %}
+
 {% block main %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
 
-    <h1>Register</h1>
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.telephone) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+	<div class="h1-container">
+		<div class="h1-style">
+			<h1>Inscription</h1>
+			<div class="h1-underline"></div>
+		</div>
+	</div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+	<div class="inscription-form-container">
+		{{ form_start(registrationForm) }}
+		{{ form_row(registrationForm.pseudo) }}
+		{{ form_row(registrationForm.email) }}
+		{{ form_row(registrationForm.prenom, {label: 'Prénom'}) }}
+		{{ form_row(registrationForm.nom) }}
+		{{ form_row(registrationForm.telephone, {label: 'Téléphone'}) }}
+		{{ form_row(registrationForm.plainPassword, {
+			label: 'Mot de passe'
+		}) }}
+		<div class="agree-terms">
+			{{ form_row(registrationForm.agreeTerms, {label: 'J\'accepte les termes'}) }}
+		</div>
+		<div class="buttons-ok-no">
+			<button type="submit" class="button-submit">Valider</button>
+			<a href="{{ path('accueil') }}">
+				<button type="submit" class="button-cancel">Annuler</button>
+			</a>
+		</div>
+			{{ form_end(registrationForm) }}
+	</div>
 {% endblock %}

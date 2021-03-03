@@ -59,15 +59,16 @@ class Sortie
     private $photo;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $organisateur;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organisateur;
 
     public function getId(): ?int
     {

@@ -11,8 +11,10 @@ class loginController extends AbstractController
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function index(): Response
+    public function connexion(): Response
     {
         return $this->render('users/login.html.twig');
     }
 }
+
+    

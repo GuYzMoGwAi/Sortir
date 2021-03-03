@@ -11,8 +11,9 @@ class EntreeController extends AbstractController
     /**
      * @Route("/", name="entree")
      */
-    public function index(): Response
+    public function entree(): Response
     {
 	return $this->render('accueil/entree.html.twig');
     }
+
 }

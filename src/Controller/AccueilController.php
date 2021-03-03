@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
+use App\Entity\Ville;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +15,19 @@ class AccueilController extends AbstractController
      */
     public function accueil(): Response
     {
+//        $ville = new Ville();
+//        $lieu = new Lieu();
+        $villeRepo = $this->getDoctrine()->getRepository(Ville::class);
+        $villes = $villeRepo->findAll();
+        $lieuRepo = $this->getDoctrine()->getRepository(Lieu::class);
+        $lieux = $lieuRepo->findBy([], ["nom" => "ASC"]);
+//        dump($villes);
+
+
+
         return $this->render('accueil/accueil.html.twig', [
+            'villes' => $villes,
+            'lieux' => $lieux,
             'userCookie' => [
                 'nom' => 'John Doe'
             ],

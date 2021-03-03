@@ -1,0 +1,61 @@
+.inscription-form-container {
+    width: 60em;
+    max-width: 90%;
+    margin: 3em auto;
+    padding: 1em 2em;
+    background-color: #999999;
+    border-radius: .5em;
+}
+.inscription-form-container div {
+    margin: 1em;
+}
+.inscription-form-container label {
+    display: inline-block;
+    min-width: 7em;
+}
+.inscription-form-container input {
+    /*display: inline-block;*/
+    width: 20em;
+    border: none;
+    padding: .7em;
+    border-radius: .3em;
+}
+.inscription-form-container .agree-terms input {
+    margin-top: 1em;
+    width: 2em;
+    height: 2em;
+    position: relative;
+    top: .5em;
+}
+.buttons-ok-no {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+.buttons-ok-no button {
+    transition: .5s;
+    display: inline-block;
+    padding: .7em 2em;
+    margin-left: 2em;
+    border-radius: .3em;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 0 5px #999999;
+}
+.buttons-ok-no .button-submit {
+    color: #095609;
+    border: 1px solid #095609;
+}
+.buttons-ok-no .button-submit:hover {
+    transition: .15s;
+    box-shadow: 0 0 5px #095609;
+}
+.buttons-ok-no .button-cancel {
+    color: #7e0b22;
+    border: 1px solid #7e0b22;
+}
+.buttons-ok-no .button-cancel:hover {
+    transition: .15s;
+    box-shadow: 0 0 5px #7e0b22;
+}

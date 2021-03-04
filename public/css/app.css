@@ -35,9 +35,9 @@ footer, header, nav
 
 body {
     font-family: poppins, sans-serif;
-    letter-spacing: .1em;
     /*background-color: #f1da5c;*/
     background-color: #cacaca;
+    color: #121212;
 }
 h1 {
     font-family: quicksand, sans-serif;
@@ -63,6 +63,7 @@ div.h1-underline {
 /*        NAVBAR                               */
 /*=============================================*/
 nav {
+    letter-spacing: .1em;
     background-color: #222222;
     color: #dfdfdf;
     display: flex;
@@ -110,6 +111,7 @@ a {
 }
 
 footer.footerStyle {
+    letter-spacing: .1em;
     background-color: #222222;
     color: #eeeeee;
     text-align: center;

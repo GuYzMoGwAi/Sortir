@@ -1,0 +1,77 @@
+.sorties-tablau {
+    width: 90%;
+    margin: 1em auto 2em auto;
+    background-color: #d4d4d4;
+    padding: 1em;
+    border-radius: .5em;
+}
+.sortie-ligne {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: .2em 0;
+}
+.sortie-ligne div {
+    padding-left: 1em;
+}
+.sortie-ligne-entete {
+    height: 2px;
+    background: linear-gradient(to right, #23032d, #cacaca);
+}
+.sortie-nom {
+    padding-left: 0em!important;
+    width: 15%;
+}
+.sortie-nom a {
+    transition: .5s;
+    display: inline-block;
+    padding: .5em .7em;
+    background-color: #2d2d2d;
+    margin-right: .5em;
+    border-radius: 50%;
+}
+.sortie-nom a:hover {
+    transition: .2s;
+    background-color: #23032d;
+}
+.sortie-nom img {
+    width: 1.4em;
+    position: relative;
+    top: .2em;
+}
+.sortie-date {
+    width: 10%;
+}
+.sortie-cloture {
+    width: 10%;
+}
+.sortie-inscrits {
+    padding-left: 0em!important;
+    text-align: center;
+    width: 10%;
+}
+.sortie-etat {
+    width: 10%;
+}
+.sortie-inscrit {
+    padding-left: 0em!important;
+    width: 5%;
+    text-align: center;
+}
+.sortie-organisateur {
+    width: 15%;
+}
+.sortie-actions {
+    width: 20%;
+}
+.sortie-liens a{
+    transition: .5s;
+    color: #632079;
+    background-color: #fdfdfd;
+    padding: .1em 1em;
+    border-radius: .2em;
+}
+.sortie-liens a:hover {
+    transition: .2s;
+    color: #fdfdfd;
+    background-color: #632079;
+}

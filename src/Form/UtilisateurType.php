@@ -4,6 +4,8 @@ namespace App\Form;
 
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +17,8 @@ class UtilisateurType extends AbstractType
             ->add('pseudo', TextType::class)
             ->add('prenom', TextType::class)
             ->add('nom', TextType::class)
-            ->add('telephone', TextType::class)
-            ->add('email', TextType::class)
+            ->add('telephone', TelType::class)
+            ->add('email', EmailType::class)
             ->add('Password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),

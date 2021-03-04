@@ -36,11 +36,18 @@
 	</nav>
 
 	{% if app.user %}
-		<p class="user-name">Bienvenue, {{ app.user.username }}</p>
+		<p class="user-name">Bienvenue, {{ app.user.username | capitalize }}</p>
 	{% endif %}
 </header>
 
 <main>
+	{% for status, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ status }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
 	{% block main %}
 		<h1>Bienvenue sur le site Sortir.com !</h1>
 	{% endblock %}

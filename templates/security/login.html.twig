@@ -9,7 +9,7 @@
 {% block main %}
 	<form method="post">
 		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			<div class="alert alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
 
 
@@ -30,13 +30,15 @@
 			<label for="inputPassword">Password</label>
 			<input type="password" name="password" id="inputPassword" class="form-control" required>
 			</div>
+			<div class="agree-terms">
+				<label for="remember_me">Se souvenir</label>
+				<input type="checkbox" id="remember_me" name="_remember_me" checked>
+			</div>
 			<input type="hidden" name="_csrf_token"
 				   value="{{ csrf_token('authenticate') }}">
 			<div class="buttons-ok-no">
 				<button type="submit" class="button-submit">Valider</button>
-				<a href="{{ path('accueil') }}">
-					<button type="submit" class="button-cancel">Annuler</button>
-				</a>
+				<a href="{{ path('entree') }}" class="button-cancel">Annuler</a>
 			</div>
 		</div>
 	</form>

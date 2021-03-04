@@ -122,6 +122,28 @@ a {
     color: rgba(35,3,45,.8);
 }
 /*=============================================*/
+/*        FLASH ALERT                          */
+/*=============================================*/
+div.alert {
+    width: 70%;
+    margin: 2em auto;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: .3em;
+    text-align: center;
+    padding: .5em;
+}
+div.alert-success {
+    color: #054005;
+    background-color: #91d491;
+    border-color: #054005;
+}
+div.alert-error {
+    color: #40030e;
+    border-color: #40030e;
+    background-color: #dd92a1;
+}
+/*=============================================*/
 /*        FOOTER                               */
 /*=============================================*/
 footer.footerStyle {

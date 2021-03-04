@@ -32,7 +32,8 @@
     flex-flow: row wrap;
     justify-content: flex-end;
 }
-.buttons-ok-no button {
+.buttons-ok-no button, .buttons-ok-no a {
+    display: inline-block;
     transition: .5s;
     display: inline-block;
     padding: .7em 2em;
@@ -43,19 +44,20 @@
     font-weight: bold;
     box-shadow: 0 0 5px #999999;
 }
-.buttons-ok-no .button-submit {
+.buttons-ok-no .button-submit, .buttons-ok-no a {
     color: #095609;
     border: 1px solid #095609;
+    background-color: #eeeeee;
 }
 .buttons-ok-no .button-submit:hover {
     transition: .15s;
     box-shadow: 0 0 5px #095609;
 }
-.buttons-ok-no .button-cancel {
+.buttons-ok-no .button-cancel, .buttons-ok-no a {
     color: #7e0b22;
     border: 1px solid #7e0b22;
 }
-.buttons-ok-no .button-cancel:hover {
+.buttons-ok-no .button-cancel:hover, .buttons-ok-no a:hover {
     transition: .15s;
     box-shadow: 0 0 5px #7e0b22;
 }

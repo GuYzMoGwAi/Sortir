@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity()
- * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
+ * @UniqueEntity(fields={"pseudo"}, message="Ce pseudo est déjà utilisé")
  */
 class Utilisateur implements UserInterface
 {
@@ -58,14 +58,14 @@ class Utilisateur implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":0})
+     * @ORM\Column(type="boolean", options={"default":false})
      */
-    private $is_admin = 0;
+    private $is_admin = false;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":1})
+     * @ORM\Column(type="boolean", options={"default":true})
      */
-    private $is_active = 1;
+    private $is_active = true;
 
     /**
      * @ORM\Column(type="integer", nullable=true)

@@ -9,7 +9,7 @@
 {% block main %}
 
 	{% for flashError in app.flashes('verify_email_error') %}
-		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+		<div class="alert alert-error" role="alert">{{ flashError }}</div>
 	{% endfor %}
 
 	<div class="h1-container">
@@ -34,9 +34,9 @@
 		</div>
 		<div class="buttons-ok-no">
 			<button type="submit" class="button-submit">Valider</button>
-			<a href="{{ path('accueil') }}">
-				<button type="submit" class="button-cancel">Annuler</button>
-			</a>
+
+				<a href="{{ path('accueil') }}" class="button-cancel">Annuler</a>
+
 		</div>
 			{{ form_end(registrationForm) }}
 	</div>

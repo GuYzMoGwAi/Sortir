@@ -22,6 +22,8 @@ class RegistrationController extends AbstractController
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+//        $user->setIsActive(true);
+//        $user->setIsAdmin(false);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -37,6 +39,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
+            $this->addFlash('success', "Vous êtes maintenant inscrit :)");
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,

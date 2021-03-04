@@ -64,14 +64,14 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+            throw new InvalidCsrfTokenException("Le token CSRF est invalide !");
         }
 
         $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['pseudo' => $credentials['pseudo']]);
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Pseudo could not be found.');
+            throw new CustomUserMessageAuthenticationException('Ce pseudo ne semble pas exister :(');
         }
 
         return $user;

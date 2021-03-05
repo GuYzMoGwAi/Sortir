@@ -68,14 +68,20 @@ class Utilisateur implements UserInterface
     private $is_active = true;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $id_site;
-
-    /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
      */
     private $sorties;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="utilisateurs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $site;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
 
     public function __construct()
     {
@@ -227,28 +233,20 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getIsActive(): ?bool
+    /**
+     * @return bool
+     */
+    public function isIsActive(): bool
     {
-        return $this->isActive;
+        return $this->is_active;
     }
 
-    public function setIsActive(bool $isActive): self
+    /**
+     * @param bool $is_active
+     */
+    public function setIsActive(bool $is_active): void
     {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    public function getIdSite(): ?int
-    {
-        return $this->id_site;
-    }
-
-    public function setIdSite(int $id_site): self
-    {
-        $this->id_site = $id_site;
-
-        return $this;
+        $this->is_active = $is_active;
     }
 
     /**
@@ -263,7 +261,7 @@ class Utilisateur implements UserInterface
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties[] = $sorty;
-            $sorty->setOrganisateur($this);
+            $sorty->setOrganisateur((int)$this);
         }
 
         return $this;
@@ -277,6 +275,30 @@ class Utilisateur implements UserInterface
                 $sorty->setOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

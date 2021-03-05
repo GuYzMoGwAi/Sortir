@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,6 +47,26 @@ class RegistrationFormType extends AbstractType
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Confirmer'],
                 'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir un mot de passe',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                ]
+            ])
+            ->add('site')
+            // On ajoute le champ "image" dans le formulaire
+            // Il n'est pas lié a la DB (mapped = false)
+            ->add('photo', FileType::class, [
+                'label' => false,
+                'multiple' => false,
+                'mapped' => false,
+                'required' => false
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -54,8 +75,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter les termes',
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

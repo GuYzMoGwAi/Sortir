@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Site;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
@@ -25,6 +26,8 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
     {
         $user = new Utilisateur();
+        $siteRepo = $this->getDoctrine()->getRepository(Site::class);
+        $site = $siteRepo->findAll();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 //        $user->setIsActive(true);

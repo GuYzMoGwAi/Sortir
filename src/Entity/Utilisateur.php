@@ -57,10 +57,6 @@ class Utilisateur implements UserInterface
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default":false})
-     */
-    private $is_admin = false;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
@@ -68,14 +64,32 @@ class Utilisateur implements UserInterface
     private $is_active = true;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @return bool
      */
-    private $id_site;
+    public function isIsActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    /**
+     * @param bool $is_active
+     */
+    public function setIsActive(bool $is_active): void
+    {
+        $this->is_active = $is_active;
+    }
+
 
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
      */
     private $sorties;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="utilisateurs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $site;
 
     public function __construct()
     {
@@ -199,41 +213,6 @@ class Utilisateur implements UserInterface
         $this->email = $email;
     }
 
-    public function getIsAdmin(): ?bool
-    {
-        return $this->is_admin;
-    }
-
-    public function setIsAdmin(bool $isAdmin): self
-    {
-        $this->is_admin = $isAdmin;
-
-        return $this;
-    }
-
-    public function getIsActive(): ?bool
-    {
-        return $this->isActive;
-    }
-
-    public function setIsActive(bool $isActive): self
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    public function getIdSite(): ?int
-    {
-        return $this->id_site;
-    }
-
-    public function setIdSite(int $id_site): self
-    {
-        $this->id_site = $id_site;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Sortie[]
@@ -243,25 +222,38 @@ class Utilisateur implements UserInterface
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): self
-    {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties[] = $sorty;
-            $sorty->setOrganisateur($this);
-        }
+//    public function addSorty(Sortie $sorty): self
+//    {
+//        if (!$this->sorties->contains($sorty)) {
+//            $this->sorties[] = $sorty;
+//            $sorty->setOrganisateur(Utilisateur::class);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeSorty(Sortie $sorty): self
+//    {
+//        if ($this->sorties->removeElement($sorty)) {
+//            // set the owning side to null (unless already changed)
+//            if ($sorty->getOrganisateur() === $this) {
+//                $sorty->setOrganisateur(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
-        return $this;
-    }
+public function getSite(): ?Site
+{
+    return $this->site;
+}
 
-    public function removeSorty(Sortie $sorty): self
-    {
-        if ($this->sorties->removeElement($sorty)) {
-            // set the owning side to null (unless already changed)
-            if ($sorty->getOrganisateur() === $this) {
-                $sorty->setOrganisateur(null);
-            }
-        }
+public function setSite(?Site $site): self
+{
+    $this->site = $site;
 
-        return $this;
-    }
+    return $this;
+}
+
 }

@@ -53,10 +53,6 @@ class Sortie
      */
     private $etat;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $photo;
 
     /**
      * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
@@ -69,6 +65,22 @@ class Sortie
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
+
+    /**
+     * @return mixed
+     */
+    public function getOrganisateur()
+    {
+        return $this->organisateur;
+    }
+
+    /**
+     * @param mixed $organisateur
+     */
+    public function setOrganisateur($organisateur): void
+    {
+        $this->organisateur = $organisateur;
+    }
 
     public function getId(): ?int
     {
@@ -155,30 +167,6 @@ class Sortie
     public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
-
-        return $this;
-    }
-
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    public function getOrganisateur(): ?int
-    {
-        return $this->organisateur;
-    }
-
-    public function setOrganisateur(int $organisateur): self
-    {
-        $this->organisateur = $organisateur;
 
         return $this;
     }

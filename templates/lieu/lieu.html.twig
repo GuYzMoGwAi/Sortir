@@ -20,17 +20,27 @@
         <h3>Filtrer les lieux</h3>
         <div class="filtres-form">
             <div class="filtres-search">
-                <div class="filtre-lieu">Le nom contient :
+                <div class="filtre-lieu" style="margin: 1em auto 2em 6em;">Le nom contient :
                     <input type="search" id="site-search" name="q"
                            aria-label="Search through site content">
                     <button>Rechercher</button>
                 </div>
+                <div class="lieux-tablau">
+                    <div class="lieu-ligne">
+                        <div class="lieu-ville"><b>Villes</b></div>
+                        <div class="lieu-cp"><b>Code postal</b></div>
+                        <div class="lieu-actions"><b>Actions</b></div>
+                    </div>
+                    {% for lieu in lieux %}
+                    <div class="lieu-ligne">
+                        <div class="lieu-ville lieu-ligne-entete"></div>
+                        <div class="lieu-cp lieu-ligne-entete"></div>
+                        <div class="lieu-actions lieu-ligne-entete"></div>
+                    </div>
+                </div>
 
             </div>
-            <div class="filtres-checkboxes"></div>
-            <div class="filtres-button-go"></div>
         </div>
+        {% endfor %}
     </div>
-    </div>
-
 {% endblock %}

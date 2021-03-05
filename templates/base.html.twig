@@ -1,65 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>{% block title %}Sortir !{% endblock %}</title>
-	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-	{% block css %}{% endblock %}
+    <meta charset="UTF-8">
+    <title>{% block title %}Sortir !{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {% block css %}{% endblock %}
 </head>
 
 <body>
 
 <header>
 
-	<nav>
-		{% block nav %}
-			<a href="{{ path('accueil') }}">
-				<div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div>
-			</a>
+    <nav>
+        {% block nav %}
+            <div class="logo-accueil">
+                <a href="{{ path('accueil') }}">
+                    <div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div>
+                    {% if app.user %}
+                        <a href="{{ path('accueil') }}">Accueil</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('lieu') }}">Gérer les Lieux</a>
+                        {% endif %}
+                    {% endif %}
+                </a>
+            </div>
+            <div>
+                <ul>
+                    {% if app.user %}
+                        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+                        <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endblock %}
+    </nav>
 
-			{# {% if not app.user %} #}
-			{# <p>Vous n'êtes pas connecté :(</p> #}
-			{# {% endif %} #}
-			<ul>
-				{% if app.user %}
-					<li><a href="{{ path('accueil') }}">Accueil</a></li>
-					{# <a href="{{ path('deconnexion') }}">Se déconnecter</a> ({{ app.user.username }}) #}
-					<li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-				{% else %}
-					<li><a href="{{ path('app_register') }}">S'inscrire</a></li>
-					<li><a href="{{ path('app_login') }}">Se connecter</a></li>
-					{# <a href="{{ path('inscription') }}">S'enregistrer</a> #}
-					{# <a href="{{ path('connexion') }}">Se connecter</a> #}
-				{% endif %}
-			</ul>
-		{% endblock %}
-	</nav>
-
-	{% if app.user %}
-		<p class="user-name">Bienvenue, {{ app.user.username | capitalize }}</p>
-	{% endif %}
+    {% if app.user %}
+        <p class="user-name">Bienvenue, {{ app.user.username | capitalize }}</p>
+    {% else %}
+        <p class="user-name">Vous n'êtes pas connecté :( </p>
+    {% endif %}
 </header>
 
 <main>
-	{% for status, messages in app.flashes %}
-		{% for message in messages %}
-			<div class="alert alert-{{ status }}">
-				{{ message }}
-			</div>
-		{% endfor %}
-	{% endfor %}
-	{% block main %}
-		<h1>Bienvenue sur le site Sortir.com !</h1>
-	{% endblock %}
+    {% for status, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ status }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% block main %}
+        <h1>Bienvenue sur le site Sortir.com !</h1>
+    {% endblock %}
 
 </main>
 
 <footer class="footerStyle">
-	©Uswap | {{ "now" | date("Y") }}
+    ©Uswap | {{ "now" | date("Y") }}
 </footer>
 
 {% block js %}
-	{# {{ encore_entry_script_tags('app') }} #}
+    {# {{ encore_entry_script_tags('app') }} #}
 {% endblock %}
 </body>
 </html>

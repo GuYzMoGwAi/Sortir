@@ -83,7 +83,17 @@ nav .nav-logo {
 nav .nav-logo img {
     width: 3em;
 }
-nav>ul {
+
+nav .logo-accueil{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+nav .logo-accueil a {
+    margin-left: 1em;
+}
+
+nav ul {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -91,21 +101,19 @@ nav>ul {
     list-style: none;
     padding: 1em;
 }
-nav>ul>li {
+nav ul li {
     /*display: inline-block;*/
     margin-right: 1em;
 }
-nav>ul>li>a {
+nav a {
     transition: .5s;
     padding: .5em 1em;
     border-radius: .3em;
-    /*border: 1px solid #222222;*/
     box-shadow: 0 0 5px #222222;
 }
-nav>ul>li>a:hover {
+nav a:hover {
     transition: .15s;
     color: #f1da5c;
-    /*border: 1px solid #757575;*/
     box-shadow: 0 0 5px #757575;
 }
 a {
@@ -118,7 +126,8 @@ a {
 .user-name {
     font-size: .8em;
     text-align: right;
-    margin-right: .5em;
+    margin-top: 0.5em;
+    margin-right: 2em;
     color: rgba(35,3,45,.8);
 }
 /*=============================================*/

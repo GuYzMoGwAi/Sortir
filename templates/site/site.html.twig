@@ -1,20 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SiteController!{% endblock %}
+{% block title %}Site{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/Uswap/src/Controller/SiteController.php'|file_link(0) }}">src/Controller/SiteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/Uswap/templates/site/site.html.twig'|file_link(0) }}">templates/site/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block main %}
+    <div class="h1-container">
+        <div class="h1-style">
+            <h1>Gerer les sites</h1>
+            <div class="h1-underline"></div>
+        </div>
+    </div>
+
+    <div class="filtres-container">
+        <h3>Filtrer les sites</h3>
+        <div class="filtres-form">
+            <div class="filtres-search">
+                <div class="filtre-site" style="margin: 1em auto 2em 6em;">Le nom contient :
+                    <input type="search" id="site-search" name="q"
+                           aria-label="Search through site content">
+
+                    <button type="submit" >Rechercher</button>
+                </div>
+                <div class="sites-tablau">
+                    <div class="site-ligne">
+                        <div class="site-ville"><b>Villes</b></div>
+                        <div class="site-actions"><b>Actions</b></div>
+                    </div>
+                    {% for site in sites %}
+                        <div class="site-ligne">
+                            <div class="site-ville site-ligne-entete"></div>
+                            <div class="site-actions site-ligne-entete"></div>
+                        </div>
+                        <div class="site-ligne">
+                            <div class="site-ville">{{ site.nom }}</div>
+                            <div class="site-actions">
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
+                                                                           alt="Modifier" title=" Modifier le lieu"></a>
+                                    <a href="#" class="icon-delete"><img src="{{ asset('icons/DeleteOk.png') }}"
+                                                                         alt="Supprimer" title=" Supprimer le lieu"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+        <div class="site-ajouter">
+            <a href="#" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
+                                              alt="Ajouter" title="Ajouter un lieu"></a>
+        </div>
+
+    </div>
 {% endblock %}

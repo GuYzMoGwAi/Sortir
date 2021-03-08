@@ -45,6 +45,12 @@ filtre-lieu{
     top: .2em;
 }
 
+.lieu-ajouter {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 9.5em;
+}
+
 .lieu-ville {
     padding-right: 5em;
     width: 43%;

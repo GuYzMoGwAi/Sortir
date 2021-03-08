@@ -14,14 +14,11 @@ class LieuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', CheckboxType::class)
-            ->add('rue')
-            ->add('latitude')
-            ->add('longitude')
-            ->add('id_ville')
+            
             ->add('submit', SubmitType::class, [
                 'label' => 'Rechercher'
             ])
+            ->getForm();
         ;
     }
 

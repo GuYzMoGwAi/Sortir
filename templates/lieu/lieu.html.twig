@@ -23,7 +23,8 @@
                 <div class="filtre-lieu" style="margin: 1em auto 2em 6em;">Le nom contient :
                     <input type="search" id="site-search" name="q"
                            aria-label="Search through site content">
-                    <button>Rechercher</button>
+
+                    <button type="submit" >Rechercher</button>
                 </div>
                 <div class="lieux-tablau">
                     <div class="lieu-ligne">
@@ -41,8 +42,7 @@
                             <div class="lieu-ville">{{ lieu.idVille.nom }}</div>
                             <div class="lieu-cp">{{ lieu.idVille.cp }}</div>
                             <div class="lieu-actions">
-                                <a href="#" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
-                                                                     alt="Ajouter" title="Ajouter un lieu"></a>
+
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
                                                                            alt="Modifier" title=" Modifier le lieu"></a>
@@ -56,5 +56,10 @@
 
             </div>
         </div>
+        <div class="lieu-ajouter">
+            <a href="#" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
+                                              alt="Ajouter" title="Ajouter un lieu"></a>
+        </div>
+
     </div>
 {% endblock %}

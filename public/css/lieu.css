@@ -7,7 +7,7 @@ filtre-lieu{
 }
 
 .lieux-tablau {
-    width: 50%;
+    width: 60%;
     margin: 1em auto 2em 6em;
     background-color: #d4d4d4;
     padding: 1em;
@@ -26,10 +26,7 @@ filtre-lieu{
     height: 2px;
     background: linear-gradient(to right, #23032d, #cacaca);
 }
-.lieu-ville-nom {
-    padding-left: 0em!important;
-    width: 15%;
-}
+
 .lieu-ville a {
     transition: .5s;
     display: inline-block;
@@ -50,14 +47,24 @@ filtre-lieu{
 
 .lieu-ville {
     padding-right: 5em;
+    width: 43%;
 }
 
 .lieu-cp {
     padding-right: 5em;
+    width: 23%;
 }
-/*.lieu-actions {*/
-/*    width: 10%;*/
-/*}*/
+.lieu-actions {
+    width: 33%;
+}
+
+.icon-delete img{
+    width: 2em;
+}
+
+.icon-modifier img{
+    width: 2em;
+}
 
 .sortie-liens a{
     transition: .5s;

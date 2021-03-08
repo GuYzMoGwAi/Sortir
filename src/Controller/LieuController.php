@@ -16,16 +16,15 @@ class LieuController extends AbstractController
     public function lieu(): Response
     {
 
-        $ville = $this->getDoctrine()->getRepository(Ville::class);
-        $lieux = $this->getDoctrine()->getRepository(Lieu::class);
+        $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
+//        dd($lieux);
 
-        if (!$ville && $lieux){
+        if (!$lieux){
             throw $this->createNotFoundException("Ville ou lieu non trouvé");
         }
 
-        return $this->render('lieu/lieu.html.twig', array(
-            'villes' => $ville,
-            'lieux' => $lieux,
-        ));
+        return $this->render('lieu/lieu.html.twig', [
+            'lieux' => $lieux
+        ]);
     }
 }

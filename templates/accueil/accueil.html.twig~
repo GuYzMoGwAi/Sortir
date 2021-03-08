@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+	{% block css %}
+		<link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+	{% endblock %}
+
+{% block main %}
+	<div class="h1-container">
+		<div class="h1-style">
+			<h1>Les sorties</h1>
+			<div class="h1-underline"></div>
+		</div>
+	</div>
+
+	<div class="filtres-container">
+		<h3>Filtrer les sorties</h3>
+		<div class="filtres-form">
+			<div class="filtres-search">
+				<div class="filtre-site">Lieu :</div>
+				<div class="filtre-site-combo">
+					<select name="sites" id="sites">
+						<option value="">--Choisissez un site--</option>
+						{% for lieu in lieux %}
+							<option value="{{ lieu.id }}">{{ lieu.nom }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="filtres-checkboxes"></div>
+			<div class="filtres-button-go"></div>
+		</div>
+	</div>
+
+	<div class="sorties-tablau">
+		<div class="sortie-ligne">
+			<div class="sortie-nom"><b>Nom de la sortie</b></div>
+			<div class="sortie-date"><b>Date de sortie</b></div>
+			<div class="sortie-cloture"><b>Date de clôture</b></div>
+			<div class="sortie-inscrits"><b>Inscrits</b></div>
+			<div class="sortie-etat"><b>État</b></div>
+			<div class="sortie-inscrit"><b>Inscrit</b></div>
+			<div class="sortie-organisateur"><b>Organisateur</b></div>
+			<div class="sortie-actions"><b>Actions</b></div>
+		</div>
+		{% for sortie in sorties %}
+			<div class="sortie-ligne">
+				<div class="sortie-nom sortie-ligne-entete"></div>
+				<div class="sortie-date sortie-ligne-entete"></div>
+				<div class="sortie-cloture sortie-ligne-entete"></div>
+				<div class="sortie-inscrits sortie-ligne-entete"></div>
+				<div class="sortie-etat sortie-ligne-entete"></div>
+				<div class="sortie-inscrit sortie-ligne-entete"></div>
+				<div class="sortie-organisateur sortie-ligne-entete"></div>
+				<div class="sortie-actions sortie-ligne-entete"></div>
+			</div>
+			<div class="sortie-ligne">
+				<div class="sortie-nom"><a href="#"><img src="{{ asset('icons/search.svg') }}"
+														 alt="loupe"></a> {{ sortie.nom }}</div>
+				<div class="sortie-date">{{ sortie.date }}</div>
+				<div class="sortie-cloture">{{ sortie.cloture }}</div>
+				<div class="sortie-inscrits">{{ sortie.inscrits }} / {{ sortie.places }}</div>
+				<div class="sortie-etat">{{ sortie.etat }}</div>
+				<div class="sortie-inscrit">{{ sortie.inscrit ? "X" : "" }}</div>
+				<div class="sortie-organisateur">{{ sortie.organisateur }}</div>
+				<div class="sortie-actions sortie-liens">
+					{% if sortie.organisateur == userCookie.nom %}
+						<a href="#">Supprimer</a>
+					{% endif %}
+					{% if sortie.inscrit %}
+						<a href="#">Se désister</a>
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}

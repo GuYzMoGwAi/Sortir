@@ -64,6 +64,11 @@ filtre-lieu{
 
 .icon-modifier img{
     width: 2em;
+    margin-left: 0.5em;
+}
+
+.icon-add img {
+    width: 2em;
 }
 
 .sortie-liens a{

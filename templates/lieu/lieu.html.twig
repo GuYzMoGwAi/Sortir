@@ -40,8 +40,16 @@
                         <div class="lieu-ligne">
                             <div class="lieu-ville">{{ lieu.idVille.nom }}</div>
                             <div class="lieu-cp">{{ lieu.idVille.cp }}</div>
-                            <div class="lieu-actions"><a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}" alt="Modifier"></a> /
-                                <a href="#" class="icon-delete"><img src="{{ asset('icons/DeleteOk.png') }}" alt="Supprimer"></a> </div>
+                            <div class="lieu-actions">
+                                <a href="#" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
+                                                                     alt="Ajouter" title="Ajouter un lieu"></a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
+                                                                           alt="Modifier" title=" Modifier le lieu"></a>
+                                    <a href="#" class="icon-delete"><img src="{{ asset('icons/DeleteOk.png') }}"
+                                                                         alt="Supprimer" title=" Supprimer le lieu"></a>
+                                {% endif %}
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

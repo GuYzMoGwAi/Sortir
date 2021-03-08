@@ -28,6 +28,7 @@
                 <ul>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                        <li><a href="{{ path('update_user') }}" class="logo-user"><img src="{{ asset('icons/user.png') }}" alt="logo user"></a></li>
                     {% else %}
                         <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
                         <li><a href="{{ path('app_login') }}">Se connecter</a></li>

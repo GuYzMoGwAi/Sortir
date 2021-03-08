@@ -120,6 +120,20 @@ a {
     text-decoration: none;
     color: inherit;
 }
+.logo-user:hover {
+    box-shadow: none;
+}
+.logo-user img {
+    transition: .5s;
+    width: 2em;
+    padding: .5em;
+    border-radius: 50%;
+    background-color: #999999;
+}
+.logo-user img:hover {
+    transition: .15s;
+
+}
 /*=============================================*/
 /*        AUTRE                                */
 /*=============================================*/
@@ -153,6 +167,12 @@ div.alert-error {
     background-color: #dd92a1;
 }
 /*=============================================*/
+/*        MAIN                                 */
+/*=============================================*/
+main {
+    min-height: 80vh;
+}
+/*=============================================*/
 /*        FOOTER                               */
 /*=============================================*/
 footer.footerStyle {
@@ -162,8 +182,8 @@ footer.footerStyle {
     text-align: center;
     padding: 2em 0 4em 0;
     /* //--// A voir ...*/
-    position: absolute;
-    width: 100%;
-    bottom: 0;
+    /*position: absolute;*/
+    /*width: 100%;*/
+    /*bottom: 0;*/
 }
 

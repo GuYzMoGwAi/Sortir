@@ -29,6 +29,11 @@ class Etat
      */
     private $sorties;
 
+    /**
+     * @ORM\Column(type="integer", options={"default" : 1})
+     */
+    private $statut;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
@@ -77,6 +82,18 @@ class Etat
                 $sorty->setEtat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatut(): ?int
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(int $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

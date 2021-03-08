@@ -53,7 +53,7 @@ class Utilisateur implements UserInterface
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=60)
      */
     private $email;
 

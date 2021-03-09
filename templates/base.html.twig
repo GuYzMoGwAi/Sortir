@@ -16,24 +16,15 @@
             <div class="logo-accueil">
                 <a href="{{ path('accueil') }}">
                     <div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div>
-<<<<<<< HEAD
-=======
+                </a>
                     {% if app.user and is_granted('ROLE_USER') %}
                         <a href="{{ path('accueil') }}">Accueil</a>
-                            <a href="{{ path('lieu') }}">Les lieux</a>
-                            <a href="{{ path('site') }}">Les sites</a>
-                        {% elseif app.user and is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('lieu') }}">Gérer les lieux</a>
-                            <a href="{{ path('site') }}">Gérer les site</a>
+                        <a href="{{ path('lieu') }}">Les lieux</a>
+                        <a href="{{ path('site') }}">Les sites</a>
+                    {% elseif app.user and is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('lieu') }}">Gérer les lieux</a>
+                        <a href="{{ path('site') }}">Gérer les site</a>
                     {% endif %}
->>>>>>> master
-                </a>
-
-                {% if app.user %}
-                    <a href="{{ path('accueil') }}">Accueil</a>
-                    <a href="{{ path('lieu') }}">Gérer les Lieux</a>
-                    <a href="{{ path('site') }}">Gérer les sites</a>
-                {% endif %}
             </div>
             <div>
                 <ul>

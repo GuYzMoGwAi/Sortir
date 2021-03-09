@@ -1,47 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lieu{% endblock %}
+{% block title %}Site{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/lieu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
 {% endblock %}
 
 
 {% block main %}
     <div class="h1-container">
         <div class="h1-style">
-            <h1>Gerer les lieux</h1>
+            <h1>Gerer les sites</h1>
             <div class="h1-underline"></div>
         </div>
     </div>
 
     <div class="filtres-container">
-        <h3>Filtrer les lieux</h3>
+        <h3>Filtrer les sites</h3>
         <div class="filtres-form">
             <div class="filtres-search">
-                <div class="filtre-lieu" style="margin: 1em auto 2em 6em;">Le nom contient :
+                <div class="filtre-site" style="margin: 1em auto 2em 6em;">Le nom contient :
                     <input type="search" id="site-search" name="q"
                            aria-label="Search through site content">
 
                     <button type="submit" >Rechercher</button>
                 </div>
-                <div class="lieux-tablau">
-                    <div class="lieu-ligne">
-                        <div class="lieu-ville"><b>Villes</b></div>
-                        <div class="lieu-cp"><b>Code postal</b></div>
-                        <div class="lieu-actions"><b>Actions</b></div>
+                <div class="sites-tablau">
+                    <div class="site-ligne">
+                        <div class="site-ville"><b>Villes</b></div>
+                        <div class="site-actions"><b>Actions</b></div>
                     </div>
-                    {% for lieu in lieux %}
-                        <div class="lieu-ligne">
-                            <div class="lieu-ville lieu-ligne-entete"></div>
-                            <div class="lieu-cp lieu-ligne-entete"></div>
-                            <div class="lieu-actions lieu-ligne-entete"></div>
+                    {% for site in sites %}
+                        <div class="site-ligne">
+                            <div class="site-ville site-ligne-entete"></div>
+                            <div class="site-actions site-ligne-entete"></div>
                         </div>
-                        <div class="lieu-ligne">
-                            <div class="lieu-ville">{{ lieu.idVille.nom }}</div>
-                            <div class="lieu-cp">{{ lieu.idVille.cp }}</div>
-                            <div class="lieu-actions">
+                        <div class="site-ligne">
+                            <div class="site-ville">{{ site.nom }}</div>
+                            <div class="site-actions">
 
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
@@ -56,7 +53,7 @@
 
             </div>
         </div>
-        <div class="lieu-ajouter">
+        <div class="site-ajouter">
             <a href="#" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
                                               alt="Ajouter" title="Ajouter un lieu"></a>
         </div>

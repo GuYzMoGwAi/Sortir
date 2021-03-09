@@ -60,4 +60,42 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/gestion_compte", name="update_user")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param AppAuthenticator $authenticator
+     * @return Response
+     */
+    public function editUser(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+            $this->addFlash('success', "Vous êtes maintenant inscrit :)");
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+        }
+        return $this->render('registration/register.html.twig',[
+            'registrationForm' => $form->createView(),
+        ]);
+    }
 }

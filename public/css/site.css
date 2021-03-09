@@ -2,32 +2,32 @@ h3 {
     margin: 1em auto 2em 6em;
 }
 
-filtre-lieu{
+filtre-site{
     margin: 1em auto 2em 6em;
 }
 
-.lieux-tablau {
+.sites-tablau {
     width: 60%;
     margin: 1em auto 2em 6em;
     background-color: #d4d4d4;
     padding: 1em;
     border-radius: .5em;
 }
-.lieu-ligne {
+.site-ligne {
     display: flex;
     flex-flow: row nowrap;
     padding: .2em 0;
     justify-content: center;
 }
-.lieu-ligne div {
+.site-ligne div {
     padding-left: 2em;
 }
-.lieu-ligne-entete {
+.site-ligne-entete {
     height: 2px;
     background: linear-gradient(to right, #23032d, #cacaca);
 }
 
-.lieu-ville a {
+.site-ville a {
     transition: .5s;
     display: inline-block;
     padding: .5em .7em;
@@ -35,32 +35,28 @@ filtre-lieu{
     margin-right: .5em;
     border-radius: 50%;
 }
-.lieu-ville a:hover {
+.site-ville a:hover {
     transition: .2s;
     background-color: #23032d;
 }
-.lieu-ville img {
+.site-ville img {
     width: 1.4em;
     position: relative;
     top: .2em;
 }
 
-.lieu-ajouter {
+.site-ajouter {
     display: flex;
     justify-content: flex-start;
     margin-left: 9.5em;
 }
 
-.lieu-ville {
+.site-ville {
     padding-right: 5em;
     width: 43%;
 }
 
-.lieu-cp {
-    padding-right: 5em;
-    width: 23%;
-}
-.lieu-actions {
+.site-actions {
     width: 33%;
 }
 

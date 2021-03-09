@@ -1,0 +1,139 @@
+.titre-tableau {
+    width: 20em;
+    margin: 5em 0 1em 3em;
+    font-size: 1.2em;
+    color: #420654;
+}
+.h2-underline {
+    height: 2px;
+    background: linear-gradient(to right, #8810ae, #23032d, #cacaca);
+}
+.tableau-container {
+    width: 90%;
+    margin: 1em auto 2em auto;
+    background-color: #d4d4d4;
+    padding: 1em;
+    border-radius: .5em;
+}
+.tableau-ligne {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: .2em 0;
+}
+.tableau-ligne b {
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-indent: .5em;
+}
+.tableau-ligne div {
+    padding-left: 1em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+.tableau-ligne-underline {
+    height: 2px;
+    background: linear-gradient(to right, #cacaca, #23032d, #23032d, #23032d, #23032d, #23032d, #cacaca);
+}
+.icones, .action-icons {
+    width: 2em;
+    margin-right: 1em;
+}
+.ajouter {
+    font-weight: bolder;
+    transition: .5s;
+    display: inline-block;
+    margin-left: 5em;
+    padding: 1em 3em;
+    border-radius: .3em;
+    border: 1px solid #024102;
+    color: #024102;
+    background-color: #afecaf;
+}
+.ajouter:hover {
+    transition: .15s;
+    background-color: #024102;
+    color: #91d491;
+}
+
+/*==========================================================================*/
+/*        UTILISATEURS                                                      */
+/*==========================================================================*/
+.user-photo {
+    width: 10%;
+}
+.user-img {
+    width: 3em;
+}
+.user-pseudo {
+    width: 10%;
+}
+.user-nom {
+    width: 15%;
+}
+.user-email {
+    width: 20%;
+}
+.user-isactive {
+    width: 5%;
+}
+.user-site {
+    width: 25%;
+}
+.colonne-actions {
+    width: 13em;
+}
+
+/*==========================================================================*/
+/*        SORTIES                                                           */
+/*==========================================================================*/
+
+
+/*==========================================================================*/
+/*        LIEUX                                                             */
+/*==========================================================================*/
+.lieu-nom {
+    width: 20%;
+}
+.lieu-adresse {
+    width: 35%;
+}
+.lieu-ville {
+    width: 15%;
+}
+.lieu-latitude {
+    width: 10%;
+}
+.lieu-longitude {
+    width: 10%;
+}
+
+/*==========================================================================*/
+/*        SITES                                                             */
+/*==========================================================================*/
+.site-nom {
+    width: 80%;
+}
+.site-users {
+    width: 15%;
+}
+
+/*==========================================================================*/
+/*        ETATS                                                             */
+/*==========================================================================*/
+.etat-statut {
+    display: flex;
+    justify-content: center;
+    width: 15%;
+}
+.etat-statut p {
+    text-align: center;
+    padding: .2em .65em;
+    border-radius: 50%;
+    /*border: 1px solid #024102;*/
+    background-color: #afecaf;
+}
+.etat-libelle {
+    width: 80%;
+}

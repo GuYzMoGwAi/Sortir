@@ -15,8 +15,6 @@ class AccueilController extends AbstractController
      */
     public function accueil(): Response
     {
-//        $ville = new Ville();
-//        $lieu = new Lieu();
         $villeRepo = $this->getDoctrine()->getRepository(Ville::class);
         $villes = $villeRepo->findAll();
         $lieuRepo = $this->getDoctrine()->getRepository(Lieu::class);

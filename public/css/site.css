@@ -1,0 +1,87 @@
+h3 {
+    margin: 1em auto 2em 6em;
+}
+
+filtre-site{
+    margin: 1em auto 2em 6em;
+}
+
+.sites-tablau {
+    width: 60%;
+    margin: 1em auto 2em 6em;
+    background-color: #d4d4d4;
+    padding: 1em;
+    border-radius: .5em;
+}
+.site-ligne {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: .2em 0;
+    justify-content: center;
+}
+.site-ligne div {
+    padding-left: 2em;
+}
+.site-ligne-entete {
+    height: 2px;
+    background: linear-gradient(to right, #23032d, #cacaca);
+}
+
+.site-ville a {
+    transition: .5s;
+    display: inline-block;
+    padding: .5em .7em;
+    background-color: #2d2d2d;
+    margin-right: .5em;
+    border-radius: 50%;
+}
+.site-ville a:hover {
+    transition: .2s;
+    background-color: #23032d;
+}
+.site-ville img {
+    width: 1.4em;
+    position: relative;
+    top: .2em;
+}
+
+.site-ajouter {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 9.5em;
+}
+
+.site-ville {
+    padding-right: 5em;
+    width: 43%;
+}
+
+.site-actions {
+    width: 33%;
+}
+
+.icon-delete img{
+    width: 2em;
+}
+
+.icon-modifier img{
+    width: 2em;
+    margin-left: 0.5em;
+}
+
+.icon-add img {
+    width: 2em;
+}
+
+.sortie-liens a{
+    transition: .5s;
+    color: #632079;
+    background-color: #fdfdfd;
+    padding: .1em 1em;
+    border-radius: .2em;
+}
+.sortie-liens a:hover {
+    transition: .2s;
+    color: #fdfdfd;
+    background-color: #632079;
+}

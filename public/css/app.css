@@ -44,6 +44,7 @@ main {
 }
 h1 {
     font-family: quicksand, sans-serif;
+    font-size: 2.5em;
     color: #23032d;
 }
 div.h1-container {
@@ -125,14 +126,17 @@ a {
 }
 .logo-user img {
     transition: .5s;
-    width: 2em;
-    padding: .5em;
+    width: 2.5em;
+    padding: .2em;
     border-radius: 50%;
     background-color: #999999;
 }
 .logo-user img:hover {
     transition: .15s;
-
+}
+.logo-admin img {
+    width: 3em;
+    padding: .2em;
 }
 /*=============================================*/
 /*        AUTRE                                */
@@ -180,7 +184,7 @@ footer.footerStyle {
     background-color: #222222;
     color: #eeeeee;
     text-align: center;
-    padding: 2em 0 4em 0;
+    padding: 2em 0;
     /* //--// A voir ...*/
     /*position: absolute;*/
     /*width: 100%;*/

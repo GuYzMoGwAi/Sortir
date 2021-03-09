@@ -16,18 +16,23 @@
             <div class="logo-accueil">
                 <a href="{{ path('accueil') }}">
                     <div class="nav-logo"><img src="{{ asset('icons/meeting.svg') }}" alt="logo"></div>
-                    {% if app.user %}
-                        <a href="{{ path('accueil') }}">Accueil</a>
-                            <a href="{{ path('lieu') }}">Gérer les Lieux</a>
-                            <a href="{{ path('site') }}">Gérer les sites</a>
-                    {% endif %}
                 </a>
+                {% if app.user %}
+                    <a href="{{ path('accueil') }}">Accueil</a>
+                    <a href="{{ path('lieu') }}">Gérer les Lieux</a>
+                    <a href="{{ path('site') }}">Gérer les sites</a>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('admin') }}" class="logo-user logo-admin"><img
+                                        src="{{ asset('icons/pilot.png') }}" alt="logo user"></a>
+                {% endif %}
             </div>
             <div>
                 <ul>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                        <li><a href="{{ path('update_user') }}" class="logo-user"><img src="{{ asset('icons/user.png') }}" alt="logo user"></a></li>
+                        <li><a href="{{ path('update_user') }}" class="logo-user"><img
+                                        src="{{ asset('icons/user.png') }}" alt="logo user"></a></li>
                     {% else %}
                         <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
                         <li><a href="{{ path('app_login') }}">Se connecter</a></li>

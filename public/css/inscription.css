@@ -61,3 +61,12 @@
     transition: .15s;
     box-shadow: 0 0 5px #7e0b22;
 }
+.message-isadmin {
+    width: 20em;
+    text-align: center;
+    padding: .5em 2em;
+    border-radius: .3em;
+    border: 1px solid #23032d;
+    background-color: #ba6dd2;
+    color: #23032d;
+}

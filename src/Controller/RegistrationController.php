@@ -86,7 +86,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            $this->addFlash('success', "Vous êtes maintenant inscrit :)");
+            $this->addFlash('success', "Vous avez bien modifié le profil");
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,

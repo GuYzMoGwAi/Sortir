@@ -27,6 +27,9 @@
     position: relative;
     top: .5em;
 }
+.photo-profil img {
+    max-width: 10em;
+}
 .buttons-ok-no {
     display: flex;
     flex-flow: row wrap;

@@ -6,10 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity()
+ * @Vich\Uploadable()
  * @UniqueEntity(fields={"pseudo"}, message="Ce pseudo est déjà utilisé")
  */
 class Utilisateur implements UserInterface
@@ -20,6 +23,18 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -255,5 +270,41 @@ public function setSite(?Site $site): self
 
     return $this;
 }
+
+    /**
+     * @return string|null
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param string|null $filename
+     * @return Utilisateur
+     */
+    public function setFilename(?string $filename): Utilisateur
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Utilisateur
+     */
+    public function setImageFile(?File $imageFile): Utilisateur
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
 
 }

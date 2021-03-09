@@ -9,37 +9,40 @@
 
 
 {% block main %}
-    <div class="h1-container">
-        <div class="h1-style">
-            <h1>Gerer les sites</h1>
-            <div class="h1-underline"></div>
-        </div>
+<div class="h1-container">
+    <div class="h1-style">
+        <h1>Gerer les sites</h1>
+        <div class="h1-underline"></div>
     </div>
+</div>
 
-    <div class="filtres-container">
-        <h3>Filtrer les sites</h3>
-        <div class="filtres-form">
-            <div class="filtres-search">
-                <div class="filtre-site" style="margin: 1em auto 2em 6em;">Le nom contient :
-                    <input type="search" id="site-search" name="q"
-                           aria-label="Search through site content">
+<div class="filtres-container">
+    <h3>Filtrer les sites</h3>
+    <div class="filtres-form">
+        <div class="filtres-search">
+            <div class="filtre-site" style="margin: 1em auto 2em 6em;">Le nom contient :
+                <input type="search" id="site-search" name="q"
+                       aria-label="Search through site content">
 
-                    <button type="submit" >Rechercher</button>
-                </div>
-                <div class="sites-tablau">
-                    <div class="site-ligne">
-                        <div class="site-ville"><b>Villes</b></div>
+                <button type="submit">Rechercher</button>
+            </div>
+            <div class="sites-tablau">
+                <div class="site-ligne">
+                    <div class="site-ville"><b>Villes</b></div>
+                    {% if is_granted('ROLE_ADMIN') %}
                         <div class="site-actions"><b>Actions</b></div>
-                    </div>
+                    {% endif %}
+                </div>
                     {% for site in sites %}
                         <div class="site-ligne">
                             <div class="site-ville site-ligne-entete"></div>
-                            <div class="site-actions site-ligne-entete"></div>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="site-actions site-ligne-entete"></div>
+                            {% endif %}
                         </div>
                         <div class="site-ligne">
                             <div class="site-ville">{{ site.nom }}</div>
                             <div class="site-actions">
-
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
                                                                            alt="Modifier" title=" Modifier le lieu"></a>
@@ -59,4 +62,4 @@
         </div>
 
     </div>
-{% endblock %}
+    {% endblock %}

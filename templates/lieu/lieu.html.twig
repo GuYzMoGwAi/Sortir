@@ -23,26 +23,34 @@
                 <div class="filtre-lieu" style="margin: 1em auto 2em 6em;">Le nom contient :
                     <input type="search" id="site-search" name="q"
                            aria-label="Search through site content">
-
-                    <button type="submit" >Rechercher</button>
+                     <button type="submit">Recherche </button>
                 </div>
                 <div class="lieux-tablau">
                     <div class="lieu-ligne">
                         <div class="lieu-ville"><b>Villes</b></div>
                         <div class="lieu-cp"><b>Code postal</b></div>
-                        <div class="lieu-actions"><b>Actions</b></div>
+                        <div class="lieu-nom"><b>Nom du lieu</b></div>
+                        <div class="lieu-adresse"><b>Adresse</b></div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <div class="lieu-actions"><b>Actions</b></div>
+                        {% endif %}
                     </div>
                     {% for lieu in lieux %}
                         <div class="lieu-ligne">
                             <div class="lieu-ville lieu-ligne-entete"></div>
                             <div class="lieu-cp lieu-ligne-entete"></div>
-                            <div class="lieu-actions lieu-ligne-entete"></div>
+                            <div class="lieu-nom lieu-ligne-entete"></div>
+                            <div class="lieu-adresse lieu-ligne-entete"></div>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="lieu-actions lieu-ligne-entete"></div>
+                            {% endif %}
                         </div>
                         <div class="lieu-ligne">
                             <div class="lieu-ville">{{ lieu.idVille.nom }}</div>
                             <div class="lieu-cp">{{ lieu.idVille.cp }}</div>
+                            <div class="lieu-nom">{{ lieu.nom }}</div>
+                            <div class="lieu-adresse">{{ lieu.rue }}</div>
                             <div class="lieu-actions">
-
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
                                                                            alt="Modifier" title=" Modifier le lieu"></a>

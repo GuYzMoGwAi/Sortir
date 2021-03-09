@@ -30,7 +30,7 @@ class LieuController extends AbstractController
 
         return $this->render('lieu/lieu.html.twig', [
             'lieux' => $lieux,
-            'lieuForm' => $form->createView(),
+            'lieu' => $form->createView(),
         ]);
     }
 }

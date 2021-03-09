@@ -2,12 +2,12 @@ h3 {
     margin: 1em auto 2em 6em;
 }
 
-filtre-lieu{
+.filtre-lieu{
     margin: 1em auto 2em 6em;
 }
 
 .lieux-tablau {
-    width: 60%;
+    width: 90%;
     margin: 1em auto 2em 6em;
     background-color: #d4d4d4;
     padding: 1em;
@@ -17,7 +17,6 @@ filtre-lieu{
     display: flex;
     flex-flow: row nowrap;
     padding: .2em 0;
-    justify-content: center;
 }
 .lieu-ligne div {
     padding-left: 2em;
@@ -53,15 +52,24 @@ filtre-lieu{
 
 .lieu-ville {
     padding-right: 5em;
-    width: 43%;
+    width: 25%;
 }
 
 .lieu-cp {
     padding-right: 5em;
-    width: 23%;
+    width: 5%;
 }
+
+.lieu-nom {
+width: 30%;
+}
+
+.lieu-adresse {
+width: 20%;
+}
+
 .lieu-actions {
-    width: 33%;
+    width: 20%;
 }
 
 .icon-delete img{

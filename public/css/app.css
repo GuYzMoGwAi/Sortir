@@ -60,7 +60,7 @@ div.h1-underline {
     height: 2px;
     width: 50%;
     margin: 0 auto;
-    background: linear-gradient(to right,#cacaca, #23032d, #cacaca);
+    background: linear-gradient(to right, #cacaca, #23032d, #23032d, #23032d, #23032d, #23032d, #cacaca);
 }
 
 /*=============================================*/

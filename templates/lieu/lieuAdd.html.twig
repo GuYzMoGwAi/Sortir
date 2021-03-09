@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lieu ajouté{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/lieu.css') }}">
+{% endblock %}
+
+{% block main %}
+
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-error" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="h1-container">
+        <div class="h1-style">
+            <h1>Ajouter un lieu</h1>
+            <div class="h1-underline"></div>
+        </div>
+    </div>
+
+    <div class="lieu-form-container">
+        {{ form_start(lieuForm) }}
+        {{ form_row(lieuForm.idVille) }}
+        {{ form_row(lieuForm.nom) }}
+        {{ form_row(lieuForm.rue) }}
+        <div class="buttons-ok-no">
+            <button type="submit" class="button-submit">Ajouter</button>
+
+            <a href="{{ path('lieu') }}" class="button-cancel">Annuler</a>
+
+        </div>
+        {{ form_end(lieuForm) }}
+    </div>
+{% endblock %}

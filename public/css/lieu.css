@@ -23,7 +23,7 @@ h3 {
 }
 .lieu-ligne-entete {
     height: 2px;
-    background: linear-gradient(to right, #23032d, #cacaca);
+    background: linear-gradient(to right, #cacaca, #23032d, #23032d, #23032d, #23032d, #23032d, #cacaca);
 }
 
 .lieu-ville a {

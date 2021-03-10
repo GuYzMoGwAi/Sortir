@@ -5,6 +5,16 @@
     padding: 1em 2em;
     background-color: #999999;
     border-radius: .5em;
+    position: relative;
+}
+.photo-user-form {
+    display: inline-block;
+}
+.photo-user-form img {
+    width: 10em;
+    position: absolute;
+    top: 3em;
+    right: 3em;
 }
 .inscription-form-container div {
     margin: 1em;

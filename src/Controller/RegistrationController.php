@@ -26,8 +26,8 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
     {
         $user = new Utilisateur();
-        $siteRepo = $this->getDoctrine()->getRepository(Site::class);
-        $site = $siteRepo->findAll();
+//        $siteRepo = $this->getDoctrine()->getRepository(Site::class);
+//        $site = $siteRepo->findAll();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 //        $user->setIsActive(true);
@@ -42,6 +42,10 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $photo = $form->get('image')->getData();
+            $image = $photo->get
+            $code = md5(uniqid()). '.' . $photo->guessEx;
+            $photo->move('')
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -62,6 +63,11 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="boolean", options={"default":true})
      */
     private $is_active = true;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+     */
+    private $image;
 
     /**
      * @return bool
@@ -255,5 +261,23 @@ public function setSite(?Site $site): self
 
     return $this;
 }
+
+    /**
+     * @return mixed
+     */
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage(UploadedFile $image): void
+    {
+        $this->image = $image;
+    }
+
+
 
 }

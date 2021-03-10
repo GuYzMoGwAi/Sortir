@@ -21,6 +21,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('pseudo')
+            ->add('image', ImageType::class, ['mapped' => false])
             ->add('email')
             ->add('prenom')
             ->add('nom')
@@ -53,7 +54,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-//            ->add('roles', ArrayType::class)
         ;
     }
 

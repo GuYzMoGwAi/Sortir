@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class RegistrationController extends AbstractController
@@ -25,10 +24,9 @@ class RegistrationController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param AppAuthenticator $authenticator
-     * @param SluggerInterface $slugger
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator, SluggerInterface $slugger): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -40,19 +38,14 @@ class RegistrationController extends AbstractController
              */
             $photoFile = $form->get('photoName')->getData();
             if ($photoFile) {
-                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
-                try {
+//                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = 'img'.'-'.uniqid().'.'.$photoFile->guessExtension();
                     $photoFile->move(
                       $this->getParameter('user_photo_dir'),
                         $newFilename
                     );
-                } catch (FileException $e) {
-//                    Queque chose à faire ici...
-//                    throw new \Exception("Erreur dans le chargement de l'image");
-                }
                 $user->setPhotoName($newFilename);
+//                dd($newFilename);
             }
 
             // encode the plain password
@@ -79,6 +72,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'h1' => 'Inscription',
         ]);
     }
     /**
@@ -117,6 +111,7 @@ class RegistrationController extends AbstractController
         }
         return $this->render('registration/register.html.twig',[
             'registrationForm' => $form->createView(),
+            'h1' => 'Modification',
         ]);
     }
 }

@@ -22,6 +22,11 @@ class Utilisateur implements UserInterface
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $pseudo;
@@ -30,6 +35,22 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
 
     /**
      * @var string The hashed password

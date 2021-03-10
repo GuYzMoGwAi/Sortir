@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Utilisateur;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,6 +20,7 @@ class UtilisateurType extends AbstractType
             ->add('nom', TextType::class)
             ->add('telephone', TextType::class)
             ->add('email', TextType::class)
+            ->add('image', ImageType::class)
             ->add('Password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
@@ -28,7 +32,7 @@ class UtilisateurType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => User::class,
+            'data_class' => Utilisateur::class,
         ));
     }
 }

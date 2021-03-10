@@ -75,54 +75,33 @@ class LieuController extends AbstractController
     }
 
     /**
-     * @Route("/lieu/modifier/{id}", name="update_lieu")
+     * @Route("/modifier/{id}", name="update_lieu")
      * @param Request $request
      * @param EntityManagerInterface $em
-     * @param $id
+     * @param $lieu
      * @return Response
      */
-    public function update(Request $request, EntityManagerInterface $em, $id): Response
+    public function lieuUpdate(Request $request, EntityManagerInterface $em, Lieu $lieu): Response
     {
-        $lieuRepo = $this->getDoctrine()->getRepository(LieuType::class);
-        $lieu = $lieuRepo->find($id);
+        $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
         $form = $this->createForm(LieuType::class, $lieu);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist();
+            $em->persist($lieu);
             $em->flush();
 
-            return $this->redirectToRoute('lieu');
+            $this->addFlash('success', 'Le lieu a bien été ajouté');
+            return $this->redirectToRoute('lieu', [
+                'id' => $lieu->getId(),
+            ]);
         }
 
-        $this->render('lieu/lieuAdd.html.twig');
+        return $this->render('lieu/lieuAdd.html.twig', [
+            'lieux' => $lieux,
+            'lieuForm' =>$form->createView(),
+        ]);
     }
-//    /**
-//     * @Route("/lieu/modifier/{id}", name="update_lieu")
-//     * @param Request $request
-//     * @param EntityManagerInterface $em
-//     * @param $lieu
-//     * @return Response
-//     */
-//    public function lieuUpdate(Request $request, EntityManagerInterface $em, Lieu $lieu): Response
-//    {
-//        $form = $this->createForm(LieuType::class, $lieu);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em->persist($lieu);
-//            $em->flush();
-//
-//            $this->addFlash('success', 'Le lieu a bien été ajouté');
-//            return $this->redirectToRoute('lieu', [
-//                'id' => $lieu->getId(),
-//            ]);
-//        }
-//
-//        return $this->render('lieu/lieu.html.twig', [
-//            'lieu' =>$form->createView(),
-//        ]);
-//    }
 
     /**
      * @Route("/lieu/supprimer/{id}", name="delete_lieu")
@@ -132,15 +111,16 @@ class LieuController extends AbstractController
      */
     public function lieuDelete(EntityManagerInterface $em, $id): Response
     {
-        $lieu = $em->getRepository(LieuType::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $lieu = $em->getRepository('App:Lieu')->find($id);
 
         if (!$lieu) {
             throw $this->createNotFoundException('L\'id n\'a pas été trouvée' . $id);
         }
         $em->remove($lieu);
         $em->flush();
-        $this->addFlash("Le lieux a bien été supprimé");
+        $this->addFlash('success', 'Le lieu a bien été supprimé');
 
-        return new Response('Le lieu à bien été supprimé');
+        return $this->redirectToRoute('lieu');
     }
 }

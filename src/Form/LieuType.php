@@ -19,10 +19,8 @@ class LieuType extends AbstractType
             ->add('nom')
             ->add('rue')
             ->add('latitude')
-            ->add('longitude')
-            ->add('id');
-
-
+            ->add('longitude');
+//            ->add('id');
     }
 
     public function configureOptions(OptionsResolver $resolver)

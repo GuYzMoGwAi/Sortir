@@ -7,11 +7,15 @@ use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 class RegistrationController extends AbstractController
 {
@@ -21,19 +25,36 @@ class RegistrationController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param AppAuthenticator $authenticator
+     * @param SluggerInterface $slugger
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator, SluggerInterface $slugger): Response
     {
         $user = new Utilisateur();
-        $siteRepo = $this->getDoctrine()->getRepository(Site::class);
-        $site = $siteRepo->findAll();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-//        $user->setIsActive(true);
-//        $user->setIsAdmin(false);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var UploadedFile $photoFile
+             */
+            $photoFile = $form->get('photoName')->getData();
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+                try {
+                    $photoFile->move(
+                      $this->getParameter('user_photo_dir'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+//                    Queque chose à faire ici...
+//                    throw new \Exception("Erreur dans le chargement de l'image");
+                }
+                $user->setPhotoName($newFilename);
+            }
+
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(

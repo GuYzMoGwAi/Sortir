@@ -63,7 +63,8 @@ class RegistrationFormType extends AbstractType
                     new File([
                         'maxSize' => '1024',
                         'mimeTypes' => [
-                            'image/*'
+//                            'image/*'
+                            'applications/pdf'
                         ],
                         'mimeTypesMessage' => 'Veuillez choisir une image valide',
                     ])

@@ -23,7 +23,7 @@
                 <div class="filtre-lieu" style="margin: 1em auto 2em 6em;">Le nom contient :
                     <input type="search" id="site-search" name="q"
                            aria-label="Search through site content">
-                     <button type="submit">Recherche </button>
+                    <button type="submit">Recherche</button>
                 </div>
                 <div class="lieux-tablau">
                     <div class="lieu-ligne">
@@ -52,10 +52,12 @@
                             <div class="lieu-adresse">{{ lieu.rue }}</div>
                             <div class="lieu-actions">
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
-                                                                           alt="Modifier" title=" Modifier le lieu"></a>
-                                    <a href="#" class="icon-delete"><img src="{{ asset('icons/DeleteOk.png') }}"
-                                                                         alt="Supprimer" title=" Supprimer le lieu"></a>
+                                    <a href="{{ path('update_lieu', {id:lieu.id}) }}" class="icon-modifier"><img
+                                                src="{{ asset('icons/EditOk.png') }}"
+                                                alt="Modifier" title=" Modifier le lieu"></a>
+                                    <a href="{{ path('delete_lieu', {id:lieu.id}) }}" class="icon-delete"><img
+                                                src="{{ asset('icons/DeleteOk.png') }}"
+                                                alt="Supprimer" title=" Supprimer le lieu"></a>
                                 {% endif %}
                             </div>
                         </div>
@@ -65,8 +67,8 @@
             </div>
         </div>
         <div class="lieu-ajouter">
-            <a href="#" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
-                                              alt="Ajouter" title="Ajouter un lieu"></a>
+            <a href="{{ path('add_lieu') }}" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
+                                                                   alt="Ajouter" title="Ajouter un lieu"></a>
         </div>
 
     </div>

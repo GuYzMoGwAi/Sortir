@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lieu ajouté{% endblock %}
+{% block title %}Ajouter{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ asset('css/lieu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lieuAdd.css') }}">
 {% endblock %}
 
 {% block main %}
@@ -21,14 +22,17 @@
 
     <div class="lieu-form-container">
         {{ form_start(lieuForm) }}
-        {{ form_row(lieuForm.idVille) }}
         {{ form_row(lieuForm.nom) }}
         {{ form_row(lieuForm.rue) }}
+        {{ form_row(lieuForm.idVille, {label: 'Ville'}) }}
+        {{ form_row(lieuForm.latitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
+        {{ form_row(lieuForm.longitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
         <div class="buttons-ok-no">
             <button type="submit" class="button-submit">Ajouter</button>
-
             <a href="{{ path('lieu') }}" class="button-cancel">Annuler</a>
-
+            {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('update_lieu', {id:lieuForm.id}) }}" class="button-cancel">Modifier</a>
+            {% endif %}
         </div>
         {{ form_end(lieuForm) }}
     </div>

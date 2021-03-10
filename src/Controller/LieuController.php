@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class LieuController extends AbstractController
 {
     /**
@@ -56,28 +57,90 @@ class LieuController extends AbstractController
     public function lieuAdd(Request $request, EntityManagerInterface $em): Response
     {
         $lieu = new Lieu();
-        $form = $this->createForm(LieuType::class);
+        $form = $this->createForm(LieuType::class, $lieu);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($lieu);
+            $em->flush();
+
+            $this->addFlash('success', 'Le lieu a bien été ajouté');
+            return $this->redirectToRoute('lieu');
+        }
+
 
         return $this->render('lieu/lieuAdd.html.twig', [
             'lieuForm' => $form->createView(),
         ]);
     }
 
+    /**
+     * @Route("/lieu/modifier/{id}", name="update_lieu")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param $id
+     * @return Response
+     */
+    public function update(Request $request, EntityManagerInterface $em, $id): Response
+    {
+        $lieuRepo = $this->getDoctrine()->getRepository(LieuType::class);
+        $lieu = $lieuRepo->find($id);
+        $form = $this->createForm(LieuType::class, $lieu);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist();
+            $em->flush();
+
+            return $this->redirectToRoute('lieu');
+        }
+
+        $this->render('lieu/lieuAdd.html.twig');
+    }
 //    /**
-//     * @Route('/lieu/modifier/{id}", name="update_lieu")
+//     * @Route("/lieu/modifier/{id}", name="update_lieu")
+//     * @param Request $request
+//     * @param EntityManagerInterface $em
+//     * @param $lieu
 //     * @return Response
 //     */
-//    public function lieuUpdate(): Response
+//    public function lieuUpdate(Request $request, EntityManagerInterface $em, Lieu $lieu): Response
 //    {
-//        return $this->render('lieu/lieu.html.twig');
-//    }
+//        $form = $this->createForm(LieuType::class, $lieu);
+//        $form->handleRequest($request);
 //
-//    /**
-//     * @Route("/lieu/supprimer/{id}", name="delete_lieu")
-//     * @return Response
-//     */
-//    public function lieuDelete(): Response
-//    {
-//        return $this->render('lieu/lieu.html.twig');
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em->persist($lieu);
+//            $em->flush();
+//
+//            $this->addFlash('success', 'Le lieu a bien été ajouté');
+//            return $this->redirectToRoute('lieu', [
+//                'id' => $lieu->getId(),
+//            ]);
+//        }
+//
+//        return $this->render('lieu/lieu.html.twig', [
+//            'lieu' =>$form->createView(),
+//        ]);
 //    }
+
+    /**
+     * @Route("/lieu/supprimer/{id}", name="delete_lieu")
+     * @param EntityManagerInterface $em
+     * @param $id
+     * @return Response
+     */
+    public function lieuDelete(EntityManagerInterface $em, $id): Response
+    {
+        $lieu = $em->getRepository(LieuType::class)->find($id);
+
+        if (!$lieu) {
+            throw $this->createNotFoundException('L\'id n\'a pas été trouvée' . $id);
+        }
+        $em->remove($lieu);
+        $em->flush();
+        $this->addFlash("Le lieux a bien été supprimé");
+
+        return new Response('Le lieu à bien été supprimé');
+    }
 }

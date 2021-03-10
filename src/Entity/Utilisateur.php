@@ -64,6 +64,14 @@ class Utilisateur implements UserInterface
     private $is_active = true;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $photoName;
+
+//    ==========================================================================
+//            GETTERS & SETTERS
+//    ==========================================================================
+    /**
      * @return bool
      */
     public function isIsActive(): bool
@@ -120,7 +128,7 @@ class Utilisateur implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->pseudo;
+        return (string)$this->pseudo;
     }
 
     /**
@@ -147,7 +155,7 @@ class Utilisateur implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -158,8 +166,14 @@ class Utilisateur implements UserInterface
     }
 
     // inutile pour nous...
-    public function getSalt(): ?string {return null;}
-    public function eraseCredentials(){}
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+    }
 
     public function getNom(): ?string
     {
@@ -244,16 +258,34 @@ class Utilisateur implements UserInterface
 //        return $this;
 //    }
 
-public function getSite(): ?Site
-{
-    return $this->site;
-}
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
 
-public function setSite(?Site $site): self
-{
-    $this->site = $site;
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
-    return $this;
-}
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoName()
+    {
+        return $this->photoName;
+    }
+
+    /**
+     * @param mixed $photoName
+     */
+    public function setPhotoName($photoName)
+    {
+        $this->photoName = $photoName;
+        return $this;
+    }
+
 
 }

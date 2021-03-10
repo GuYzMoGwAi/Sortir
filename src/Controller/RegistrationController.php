@@ -7,11 +7,14 @@ use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+
 
 class RegistrationController extends AbstractController
 {
@@ -26,14 +29,25 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
     {
         $user = new Utilisateur();
-        $siteRepo = $this->getDoctrine()->getRepository(Site::class);
-        $site = $siteRepo->findAll();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-//        $user->setIsActive(true);
-//        $user->setIsAdmin(false);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var UploadedFile $photoFile
+             */
+            $photoFile = $form->get('photoName')->getData();
+            if ($photoFile) {
+//                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = 'img'.'-'.uniqid().'.'.$photoFile->guessExtension();
+                    $photoFile->move(
+                      $this->getParameter('user_photo_dir'),
+                        $newFilename
+                    );
+                $user->setPhotoName($newFilename);
+//                dd($newFilename);
+            }
+
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -58,6 +72,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'h1' => 'Inscription',
         ]);
     }
     /**
@@ -96,6 +111,7 @@ class RegistrationController extends AbstractController
         }
         return $this->render('registration/register.html.twig',[
             'registrationForm' => $form->createView(),
+            'h1' => 'Modification',
         ]);
     }
 }

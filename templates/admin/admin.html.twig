@@ -46,8 +46,8 @@
 
             <div class="tableau-ligne">
                 <div class="user-photo">
-                    {% if (user.filename is defined) and (user.filename is not empty) %}
-                        <img src="{{ asset('images/') }}{{ user.filename }}" class="user-img" alt="user-image">
+                    {% if (user.photoName is defined) and (user.photoName is not empty) %}
+                        <img src="{{ asset('images/users/') }}{{ user.photoName }}" class="user-img" alt="user-image">
                     {% else %}
                         <img src="{{ asset('icons/user_default.png') }}" class="user-img" alt="user-image">
                     {% endif %}

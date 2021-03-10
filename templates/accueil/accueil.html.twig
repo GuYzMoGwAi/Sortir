@@ -21,7 +21,7 @@
 				<div class="filtre-site">Lieu :</div>
 				<div class="filtre-site-combo">
 					<select name="sites" id="sites">
-						<option value="">--Choisissez un site--</option>
+						<option value="">--Choisissez un lieu--</option>
 						{% for lieu in lieux %}
 							<option value="{{ lieu.id }}">{{ lieu.nom }}</option>
 						{% endfor %}
@@ -75,5 +75,6 @@
 			</div>
 		{% endfor %}
 	</div>
+	<button><a href="nouvelleSortie">Créer</a></button>
 
 {% endblock %}

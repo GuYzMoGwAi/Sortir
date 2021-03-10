@@ -256,4 +256,8 @@ public function setSite(?Site $site): self
     return $this;
 }
 
+public function __toString()
+{
+    return $this->nom;
+}
 }

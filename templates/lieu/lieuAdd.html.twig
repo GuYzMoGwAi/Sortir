@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/lieu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lieuAdd.css') }}">
+{% endblock %}
+
+{% block main %}
+
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-error" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="h1-container">
+        <div class="h1-style">
+            <h1>{{ h1 }}</h1>
+            <div class="h1-underline"></div>
+        </div>
+    </div>
+
+    <div class="lieu-form-container">
+        {{ form_start(lieuForm) }}
+        {{ form_row(lieuForm.nom) }}
+        {{ form_row(lieuForm.rue, {'label': 'Adresse'}) }}
+        {{ form_row(lieuForm.idVille, {'label': 'Ville'}) }}
+        {{ form_row(lieuForm.latitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
+        {{ form_row(lieuForm.longitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
+
+        <div class="buttons-ok-no">
+            {% if is_granted('ROLE_ADMIN') %}
+                <button type="submit" class="button-submit">Modifier</button>
+{#                <button type="submit" class="button-submit">Ajouter</button>#}
+                    {# TODO il y a des choses à voir !! #}
+            {% elseif is_granted('ROLE_USER') %}
+                <button type="submit" class="button-submit">Ajouter</button>
+            {% endif %}
+            <a href="{{ path('lieu') }}" class="button-cancel">Annuler</a>
+        </div>
+        {{ form_end(lieuForm) }}
+    </div>
+{% endblock %}

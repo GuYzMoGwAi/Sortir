@@ -7,7 +7,7 @@ filtre-site{
 }
 
 .sites-tablau {
-    width: 60%;
+    width: 30%;
     margin: 1em auto 2em 6em;
     background-color: #d4d4d4;
     padding: 1em;
@@ -17,14 +17,13 @@ filtre-site{
     display: flex;
     flex-flow: row nowrap;
     padding: .2em 0;
-    justify-content: center;
 }
 .site-ligne div {
     padding-left: 2em;
 }
 .site-ligne-entete {
     height: 2px;
-    background: linear-gradient(to right, #23032d, #cacaca);
+    background: linear-gradient(to right, #cacaca, #23032d, #23032d, #23032d, #23032d, #23032d, #cacaca);
 }
 
 .site-ville a {

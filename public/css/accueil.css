@@ -15,7 +15,7 @@
 }
 .sortie-ligne-entete {
     height: 2px;
-    background: linear-gradient(to right, #23032d, #cacaca);
+    background: linear-gradient(to right, #cacaca, #23032d, #23032d, #23032d, #23032d, #23032d, #cacaca);
 }
 .sortie-nom {
     padding-left: 0em!important;

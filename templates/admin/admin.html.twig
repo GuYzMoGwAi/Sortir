@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+{% endblock %}
+
+{% block title %}Administration{% endblock %}
+
+
+{% block main %}
+
+    <div class="h1-container">
+        <div class="h1-style">
+            <h1>Administration</h1>
+            <div class="h1-underline"></div>
+        </div>
+    </div>
+
+    <div class="titre-tableau">
+        <h2>Les utilisateurs</h2>
+        <div class="h2-underline"></div>
+    </div>
+    <div class="ajouter"><a href="#">AJOUTER</a></div>
+
+    <div class="tableau-container">
+        <div class="tableau-ligne">
+            <div class="user-photo"><b>Photo</b></div>
+            <div class="user-pseudo"><b>Pseudo</b></div>
+            <div class="user-nom"><b>Prénom, nom</b></div>
+            <div class="user-email"><b>Email</b></div>
+            <div class="user-isactive"><b>Actif</b></div>
+            <div class="user-site"><b>Site de rattachement</b></div>
+            <div class="colonne-actions"><b>Actions</b></div>
+        </div>
+        {% for user in utilisateurs %}
+            <div class="tableau-ligne">
+                <div class="user-photo tableau-ligne-underline"></div>
+                <div class="user-pseudo tableau-ligne-underline"></div>
+                <div class="user-nom tableau-ligne-underline"></div>
+                <div class="user-email tableau-ligne-underline"></div>
+                <div class="user-isactive tableau-ligne-underline"></div>
+                <div class="user-site tableau-ligne-underline"></div>
+                <div class="colonne-actions tableau-ligne-underline"></div>
+            </div>
+
+            <div class="tableau-ligne">
+                <div class="user-photo">
+                    {% if (user.photoName is defined) and (user.photoName is not empty) %}
+                        <img src="{{ asset('images/users/') }}{{ user.photoName }}" class="user-img" alt="user-image">
+                    {% else %}
+                        <img src="{{ asset('icons/user_default.png') }}" class="user-img" alt="user-image">
+                    {% endif %}
+                </div>
+                <div class="user-pseudo">{{ user.pseudo }}</div>
+                <div class="user-nom">{{ user.prenom }} {{ user.nom }}</div>
+                <div class="user-email">{{ user.email }}</div>
+                <div class="user-isactive">
+                    {% if user.isActive %}
+                        <img src="{{ asset('icons/check.png') }}" class="icones" alt="Actif">
+                    {% endif %}
+                </div>
+                {# <div class="sortie-inscrit user-isactive">{{ user.isActive ? "X" : "" }}</div> #}
+                <div class="user-site">{{ user.site }}</div>
+                <div class="colonne-actions">
+                    <a href="#"><img src="{{ asset('icons/edit_alt.png') }}" alt="Éditer" class="action-icons"></a>
+                    <a href="#"><img src="{{ asset('icons/inactivate.png') }}" alt="Désactiver" class="action-icons"></a>
+                    <a href="#"><img src="{{ asset('icons/delete.png') }}" alt="Supprimer" class="action-icons"></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="titre-tableau">
+        <h2>Les sorties</h2>
+        <div class="h2-underline"></div>
+    </div>
+    <div class="ajouter"><a href="#">AJOUTER</a></div>
+
+{#        ================================================================#}
+{#                AJOUTER LES SORTIES                                     #}
+{#        ================================================================#}
+
+
+<div class="titre-tableau">
+    <h2>Les lieux</h2>
+    <div class="h2-underline"></div>
+</div>
+    <div class="ajouter"><a href="#">AJOUTER</a></div>
+
+<div class="tableau-container">
+    <div class="tableau-ligne">
+        <div class="lieu-nom"><b>Nom</b></div>
+        <div class="lieu-adresse"><b>Adresse</b></div>
+        <div class="lieu-ville"><b>Ville</b></div>
+        <div class="lieu-latitude"><b>Latitude</b></div>
+        <div class="lieu-longitude"><b>Longitude</b></div>
+        <div class="colonne-actions"><b>Actions</b></div>
+    </div>
+    {% for lieu in lieux %}
+        <div class="tableau-ligne">
+            <div class="lieu-nom tableau-ligne-underline"></div>
+            <div class="lieu-adresse tableau-ligne-underline"></div>
+            <div class="lieu-ville tableau-ligne-underline"></div>
+            <div class="lieu-latitude tableau-ligne-underline"></div>
+            <div class="lieu-longitude tableau-ligne-underline"></div>
+            <div class="colonne-actions tableau-ligne-underline"></div>
+        </div>
+
+        <div class="tableau-ligne">
+            <div class="lieu-nom">{{ lieu.nom }}</div>
+            <div class="lieu-adresse">{{ lieu.rue }}</div>
+            <div class="lieu-ville">{{ lieu.idVille.nom }}</div>
+            <div class="lieu-latitude">{{ lieu.latitude }}</div>
+            <div class="lieu-longitude">{{ lieu.longitude }}</div>
+            <div class="colonne-actions">
+                <a href="#"><img src="{{ asset('icons/edit_alt.png') }}" alt="Éditer" class="action-icons"></a>
+                <a href="#"><img src="{{ asset('icons/delete.png') }}" alt="Supprimer" class="action-icons"></a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="titre-tableau" style="width: 30em;">
+    <h2>Les Sites de rattachements</h2>
+    <div class="h2-underline"></div>
+</div>
+    <div class="ajouter"><a href="#">AJOUTER</a></div>
+
+<div class="tableau-container" style="width: 50em;">
+    <div class="tableau-ligne">
+        <div class="site-nom"><b>Nom</b></div>
+        <div class="site-users"><b>Liés</b></div>
+        <div class="colonne-actions"><b>Actions</b></div>
+    </div>
+    {% for site in sites %}
+    <div class="tableau-ligne">
+        <div class="site-nom tableau-ligne-underline"></div>
+        <div class="site-users tableau-ligne-underline"></div>
+        <div class="colonne-actions tableau-ligne-underline"></div>
+    </div>
+        <div class="tableau-ligne">
+            <div class="site-nom">{{ site.nom }}</div>
+            <div class="site-users"><a href="#"><img src="{{ asset('icons/users-group.png') }}" alt="Utilisateurs"></a></div>
+            <div class="colonne-actions">
+                <a href="#"><img src="{{ asset('icons/edit_alt.png') }}" alt="Éditer" class="action-icons"></a>
+                <a href="#"><img src="{{ asset('icons/delete.png') }}" alt="Supprimer" class="action-icons"></a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="titre-tableau">
+    <h2>Les États</h2>
+    <div class="h2-underline"></div>
+</div>
+    <div class="ajouter"><a href="#">AJOUTER</a></div>
+
+<div class="tableau-container" style="width: 55em;">
+    <div class="tableau-ligne">
+        <div class="etat-statut"><b>Statut</b></div>
+        <div class="etat-libelle"><b>Libéllé</b></div>
+        <div class="colonne-actions"><b>Actions</b></div>
+    </div>
+    {% for etat in etats %}
+    <div class="tableau-ligne">
+        <div class="etat-statut tableau-ligne-underline"></div>
+        <div class="etat-libelle tableau-ligne-underline"></div>
+        <div class="colonne-actions tableau-ligne-underline"></div>
+    </div>
+
+        <div class="tableau-ligne">
+            <div class="etat-statut"><p>{{ etat.statut }}</p></div>
+            <div class="etat-libelle">{{ etat.libelle }}</div>
+            <div class="colonne-actions">
+                <a href="#"><img src="{{ asset('icons/edit_alt.png') }}" alt="Éditer" class="action-icons"></a>
+{#                <a href="#"><img src="{{ asset('icons/delete.png') }}" alt="Supprimer" class="action-icons"></a>#}
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+

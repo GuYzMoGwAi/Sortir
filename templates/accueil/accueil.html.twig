@@ -73,10 +73,10 @@
 
 				<div class="sortie-organisateur">{{ sortie.organisateur }}</div>
 				<div class="sortie-actions sortie-liens">
-					{% if sortie.organisateur == userCookie.nom %}
-						<a href="#">Supprimer</a>
-						<a href="modifierSortie/{{ sortie.id }}">Modifier</a>
-					{% endif %}
+{#					{% if sortie.organisateur == app.user.username || is_granted('ROLE_ADMIN') %}#}
+						<a href="{{ path('delete_sortie', {'id':sortie.id}) }}">Supprimer</a>
+						<a href="{{ path('modifier_sortie', {'id':sortie.id}) }}">Modifier</a>
+{#					{% endif %}#}
 					{% for utilisateurSortie in utilisateursSorties%}
 						{% if utilisateurSortie.sortieId == sortie.id %}
 							<a href="#">Se désister</a>

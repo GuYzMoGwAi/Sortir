@@ -27,31 +27,4 @@ class SiteController extends AbstractController
 
         ]);
     }
-
-//    /**
-//     * @Route("/site/ajouter", name="add_site")
-//     * @return Response
-//     */
-//    public function siteAdd(): Response
-//    {
-//        return $this->render('site/site.html.twig');
-//    }
-//
-//    /**
-//     * @Route('/site/modifier/{id}", name="update_site")
-//     * @return Response
-//     */
-//    public function siteUpdate(): Response
-//    {
-//        return $this->render('site/site.html.twig');
-//    }
-//
-//    /**
-//     * @Route("/site/supprimer/{id}", name="delete_site")
-//     * @return Response
-//     */
-//    public function siteDelete(): Response
-//    {
-//        return $this->render('site/site.html.twig');
-//    }
 }

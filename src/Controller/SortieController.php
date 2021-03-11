@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use App\Form\LieuType;
 use App\Form\SortieType;
 use Doctrine\DBAL\Types\ArrayType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -26,8 +27,7 @@ class SortieController extends AbstractController
      */
     public function newSortie(Request $request): Response
     {
-        $organisateur = $this->getUser()->getUsername();
-
+        $organisateur = $this->getUser();
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
 
@@ -43,34 +43,62 @@ class SortieController extends AbstractController
 
             return $this->redirectToRoute('accueil');
         }
-        return $this->render('sortie/creerSortie.html.twig',[
-            'sortieForm'=> $form->createView()
+        return $this->render('sortie/creerSortie.html.twig', [
+            'sortieForm' => $form->createView(),
+            'h1' => 'Créer une sortie',
+            'button' => ' Ajouter',
         ]);
     }
 
     /**
-     * @Route("/modifierSortie/{idSortie}", name="Modifier Sortie")
-     * @param  int $idSortie
+     * @Route("/modifierSortie/{id}", name="modifier_sortie")
      * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Sortie $sortie
      * @return Response
      */
-    public function editSortie(int $idSortie, Request $request): Response
+    public function editSortie(Request $request, EntityManagerInterface $em, Sortie $sortie): Response
     {
-        $sortie = $this->getDoctrine()->getRepository(Sortie::class)->findBy(["id"=>$idSortie]);
         $form = $this->createForm(SortieType::class, $sortie);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrement BDD
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($sortie);
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($sortie);
+            $em->flush();
             $this->addFlash('success', "Sortie Modifiée");
+
+            return $this->redirectToRoute('accueil', [
+                'id' => $sortie->getId(),
+            ]);
         }
-        return $this->render('sortie/creerSortie.html.twig',[
-            'sortieForm'=> $form->createView()
+        return $this->render('sortie/creerSortie.html.twig', [
+            'sortieForm' => $form->createView(),
+            'h1' => 'Modifier la sortie',
+            'button' => ' Modifier',
         ]);
+    }
+
+    /**
+     * @route("/sortie/supprimer/{id}", name="delete_sortie")
+     * @param $id
+     * @return Response
+     */
+    public function sortieDelete( $id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $sortie = $em->getRepository('App:Sortie')->find($id);
+
+        if (!$sortie) {
+            $this->addFlash('error',"L'id n'a pas été trouvé");
+        }
+        
+        $em->remove($sortie);
+        $em->flush();
+        $this->addFlash('success','La sortie a bien été supprimé');
+
+        return $this->redirectToRoute('accueil');
     }
 
 }

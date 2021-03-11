@@ -42,14 +42,12 @@ class RegistrationController extends AbstractController
              */
             $photoFile = $form->get('photoName')->getData();
             if ($photoFile) {
-//                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $newFilename = 'img'.'-'.uniqid().'.'.$photoFile->guessExtension();
                     $photoFile->move(
                       $this->getParameter('user_photo_dir'),
                         $newFilename
                     );
                 $user->setPhotoName($newFilename);
-//                dd($newFilename);
             }
 
             // encode the plain password
@@ -94,6 +92,18 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var UploadedFile $photoFile
+             */
+            $photoFile = $form->get('photoName')->getData();
+            if ($photoFile) {
+                $newFilename = 'img'.'-'.uniqid().'.'.$photoFile->guessExtension();
+                $photoFile->move(
+                    $this->getParameter('user_photo_dir'),
+                    $newFilename
+                );
+                $user->setPhotoName($newFilename);
+            }
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -105,7 +115,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            $this->addFlash('success', "Vous êtes maintenant inscrit :)");
+            $this->addFlash('success', "Le profil a bien été modifié");
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,

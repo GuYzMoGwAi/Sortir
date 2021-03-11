@@ -30,7 +30,12 @@
         {{ form_row(sortieForm.lieu) }}
         {{ form_row(sortieForm.etat) }}
         {% if is_granted('ROLE_ADMIN') %}
-            {{ form_row(sortieForm.nom) }}
+            {{ form_row(sortieForm.organisateur) }}
+        {% else %}
+            <div style="display: none;">
+                {{ form_row(sortieForm.organisateur) }}
+            </div>
+
         {% endif %}
         <div class="buttons-ok-no">
             <button type="submit" class="button-submit">{{ button }}</button>

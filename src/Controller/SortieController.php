@@ -20,15 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/nouvelleSortie", name="Nouvelle Sortie")
+     * @Route("/sortie/ajouter", name="nouvelle_sortie")
      * @param Request $request
      * @return Response
      */
     public function newSortie(Request $request): Response
     {
-        $organisateur = $this->getUser();
-
-        $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
+        $organisateur = $this->getUser()->getUsername();
 
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
@@ -38,9 +36,12 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //enregistrement BDD
             $entityManager = $this->getDoctrine()->getManager();
+            $sortie->setOrganisateur($organisateur);
             $entityManager->persist($sortie);
             $entityManager->flush();
             $this->addFlash('success', "Sortie créée");
+
+            return $this->redirectToRoute('accueil');
         }
         return $this->render('sortie/creerSortie.html.twig',[
             'sortieForm'=> $form->createView()

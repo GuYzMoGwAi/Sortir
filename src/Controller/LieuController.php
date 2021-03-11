@@ -56,7 +56,6 @@ class LieuController extends AbstractController
      */
     public function lieuAdd(Request $request, EntityManagerInterface $em): Response
     {
-        $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
         $lieu = new Lieu();
         $form = $this->createForm(LieuType::class, $lieu);
         $form->handleRequest($request);
@@ -71,9 +70,9 @@ class LieuController extends AbstractController
 
 
         return $this->render('lieu/lieuAdd.html.twig', [
-            'lieux' => $lieux,
             'lieuForm' => $form->createView(),
             'h1' => 'Ajouter le lieu',
+            'button' => 'Ajouter',
         ]);
     }
 
@@ -86,7 +85,7 @@ class LieuController extends AbstractController
      */
     public function lieuUpdate(Request $request, EntityManagerInterface $em, Lieu $lieu): Response
     {
-        $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
+//        dd($lieu);
         $form = $this->createForm(LieuType::class, $lieu);
         $form->handleRequest($request);
 
@@ -101,9 +100,9 @@ class LieuController extends AbstractController
         }
 
         return $this->render('lieu/lieuAdd.html.twig', [
-            'lieux' => $lieux,
             'lieuForm' =>$form->createView(),
             'h1' => 'Modifier le lieu',
+            'button' => 'Modifier',
         ]);
     }
 

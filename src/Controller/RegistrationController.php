@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Site;
+use App\Entity\Sortie;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -38,14 +42,12 @@ class RegistrationController extends AbstractController
              */
             $photoFile = $form->get('photoName')->getData();
             if ($photoFile) {
-//                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $newFilename = 'img'.'-'.uniqid().'.'.$photoFile->guessExtension();
                     $photoFile->move(
                       $this->getParameter('user_photo_dir'),
                         $newFilename
                     );
                 $user->setPhotoName($newFilename);
-//                dd($newFilename);
             }
 
             // encode the plain password
@@ -90,6 +92,18 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var UploadedFile $photoFile
+             */
+            $photoFile = $form->get('photoName')->getData();
+            if ($photoFile) {
+                $newFilename = 'img'.'-'.uniqid().'.'.$photoFile->guessExtension();
+                $photoFile->move(
+                    $this->getParameter('user_photo_dir'),
+                    $newFilename
+                );
+                $user->setPhotoName($newFilename);
+            }
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -101,7 +115,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            $this->addFlash('success', "Vous êtes maintenant inscrit :)");
+            $this->addFlash('success', "Le profil a bien été modifié");
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
@@ -113,5 +127,25 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
             'h1' => 'Modification',
         ]);
+    }
+
+    /**
+     * @param $id
+     * @return Response
+     * @Route ("/admin/user/{id}/delete", name="delete_user")
+     */
+    public function deleteUser($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userRepo = $em->getRepository(Utilisateur::class);
+        $user = $userRepo->find($id);
+        $pseudo = $user->getPseudo();
+        $em->remove($user);
+        $em->flush();
+
+
+        $this->addFlash('success', "L'utilisateur « ".$pseudo." » a bien été supprimé");
+
+        return $this->redirectToRoute('admin');
     }
 }

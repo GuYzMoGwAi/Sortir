@@ -5,6 +5,7 @@
     padding: 1em;
     border-radius: .5em;
 }
+
 .sortie-ligne {
     display: flex;
     flex-flow: row nowrap;
@@ -17,6 +18,7 @@
     height: 2px;
     background: linear-gradient(to right, #cacaca, #23032d, #23032d, #23032d, #23032d, #23032d, #cacaca);
 }
+
 .sortie-nom {
     padding-left: 0em!important;
     width: 15%;
@@ -38,6 +40,11 @@
     position: relative;
     top: .2em;
 }
+
+.sortie-ville{
+    width: 10%;
+}
+
 .sortie-date {
     width: 10%;
 }

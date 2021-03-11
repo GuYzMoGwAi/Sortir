@@ -36,6 +36,7 @@
 	<div class="sorties-tablau">
 		<div class="sortie-ligne">
 			<div class="sortie-nom"><b>Nom de la sortie</b></div>
+			<div class="sortie-ville">Ville</div>
 			<div class="sortie-date"><b>Date de sortie</b></div>
 			<div class="sortie-cloture"><b>Date de clôture</b></div>
 			<div class="sortie-inscrits"><b>Max Inscrits</b></div>
@@ -47,6 +48,7 @@
 		{% for sortie in sorties %}
 			<div class="sortie-ligne">
 				<div class="sortie-nom sortie-ligne-entete"></div>
+				<div class="sortie-ville sortie-ligne-entete"></div>
 				<div class="sortie-date sortie-ligne-entete"></div>
 				<div class="sortie-cloture sortie-ligne-entete"></div>
 				<div class="sortie-inscrits sortie-ligne-entete"></div>
@@ -58,12 +60,14 @@
 			<div class="sortie-ligne">
 				<div class="sortie-nom"><a href="#"><img src="{{ asset('icons/search.svg') }}"
 														 alt="loupe"></a> {{ sortie.nom }}</div>
+				<div class="sortie-ville">{{ sortie.lieu.idVille.nom }}</div>
 				<div class="sortie-date">{{ sortie.dateHeureDebut.format('d/m/Y H:i') }}</div>
 				<div class="sortie-cloture">{{ sortie.dateCloture.format('d/m/Y H:i') }}</div>
 				<div class="sortie-inscrits"> {{ sortie.nbMaxInscrits }}</div>
 				<div class="sortie-etat">{{ sortie.etat }}</div>
 				<div class="sortie-inscrit"></div>
 				{% for utilisateurSortie in utilisateursSorties %}
+					<div><p>Petit test</p></div>
 					{% if utilisateurSortie.sortieId == sortie.id %}
 						<div class="sortie-inscrit">X</div>
 					{% else %}
@@ -91,6 +95,6 @@
 	</div>
 {#	<button><a href="{{ path('nouvelle_sortie') }}">Créer</a></button>#}
 	<a href="{{ path('nouvelle_sortie') }}" class="icon-add" style="margin-left: 8em;"><img src="{{ asset('icons/add_3.png') }}"
-														   alt="Créer" title="Ajouter une sortie" style="width: 2.5em;"></a>
+														   alt="Créer" title="Ajouter une sortie" style="width: 2.1em;"></a>
 
 {% endblock %}

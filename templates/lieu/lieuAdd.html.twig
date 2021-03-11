@@ -15,7 +15,7 @@
 
     <div class="h1-container">
         <div class="h1-style">
-            <h1>Ajouter un lieu</h1>
+            <h1>{{ h1 }}</h1>
             <div class="h1-underline"></div>
         </div>
     </div>
@@ -27,10 +27,13 @@
         {{ form_row(lieuForm.idVille, {'label': 'Ville'}) }}
         {{ form_row(lieuForm.latitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
         {{ form_row(lieuForm.longitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
+
         <div class="buttons-ok-no">
             {% if is_granted('ROLE_ADMIN') %}
                 <button type="submit" class="button-submit">Modifier</button>
-                {# <a href="{{ path('update_lieu', {'id':lieuForm.}) }}" class="button-submit">Modifier</a> #}
+{#                <button type="submit" class="button-submit">Ajouter</button>#}
+{#                <a href="{{ path('update_lieu', {'id':lieux.id}) }}" class="button-submit">Modifier</a>#}
+                    {# TODO il y a des choses à voir !! #}
             {% elseif is_granted('ROLE_USER') %}
                 <button type="submit" class="button-submit">Ajouter</button>
             {% endif %}

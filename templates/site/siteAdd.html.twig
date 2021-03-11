@@ -3,8 +3,8 @@
 {% block title %}Ajouter{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ asset('css/lieu.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/lieuAdd.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/siteAdd.css') }}">
 {% endblock %}
 
 {% block main %}
@@ -20,22 +20,17 @@
         </div>
     </div>
 
-    <div class="lieu-form-container">
-        {{ form_start(lieuForm) }}
-        {{ form_row(lieuForm.nom, {'label': 'Nom du lieu :'}) }}
-        {{ form_row(lieuForm.rue, {'label': 'Adresse :'}) }}
-        {{ form_row(lieuForm.idVille, {'label': 'Ville :'}) }}
-        {{ form_row(lieuForm.latitude, {'label': 'Latitude :'}, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
-        {{ form_row(lieuForm.longitude, {'label': 'Longitude :'}, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
-
+    <div class="site-form-container">
+        {{ form_start(siteForm) }}
+        {{ form_row(siteForm.nom, {'label': 'Nom du site : '}) }}
         <div class="buttons-ok-no">
             {% if is_granted('ROLE_ADMIN') %}
                 <button type="submit" class="button-submit">{{ button }}</button>
             {% elseif is_granted('ROLE_USER') %}
                 <button type="submit" class="button-submit">Ajouter</button>
             {% endif %}
-            <a href="{{ path('lieu') }}" class="button-cancel">Annuler</a>
+            <a href="{{ path('site') }}" class="button-cancel">Annuler</a>
         </div>
-        {{ form_end(lieuForm) }}
+        {{ form_end(siteForm) }}
     </div>
 {% endblock %}

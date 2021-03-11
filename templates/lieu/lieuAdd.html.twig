@@ -22,17 +22,15 @@
 
     <div class="lieu-form-container">
         {{ form_start(lieuForm) }}
-        {{ form_row(lieuForm.nom) }}
-        {{ form_row(lieuForm.rue, {'label': 'Adresse'}) }}
-        {{ form_row(lieuForm.idVille, {'label': 'Ville'}) }}
-        {{ form_row(lieuForm.latitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
-        {{ form_row(lieuForm.longitude, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
+        {{ form_row(lieuForm.nom, {'label': 'Nom du lieu :'}) }}
+        {{ form_row(lieuForm.rue, {'label': 'Adresse :'}) }}
+        {{ form_row(lieuForm.idVille, {'label': 'Ville :'}) }}
+        {{ form_row(lieuForm.latitude, {'label': 'Latitude :'}, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
+        {{ form_row(lieuForm.longitude, {'label': 'Longitude :'}, {'attr': {'placeholder': 'Champ non obligatoire'}}) }}
 
         <div class="buttons-ok-no">
             {% if is_granted('ROLE_ADMIN') %}
-                <button type="submit" class="button-submit">Modifier</button>
-{#                <button type="submit" class="button-submit">Ajouter</button>#}
-                    {# TODO il y a des choses à voir !! #}
+                <button type="submit" class="button-submit">{{ button }}</button>
             {% elseif is_granted('ROLE_USER') %}
                 <button type="submit" class="button-submit">Ajouter</button>
             {% endif %}

@@ -72,6 +72,7 @@ class LieuController extends AbstractController
         return $this->render('lieu/lieuAdd.html.twig', [
             'lieuForm' => $form->createView(),
             'h1' => 'Ajouter le lieu',
+            'button' => 'Ajouter',
         ]);
     }
 
@@ -101,6 +102,7 @@ class LieuController extends AbstractController
         return $this->render('lieu/lieuAdd.html.twig', [
             'lieuForm' =>$form->createView(),
             'h1' => 'Modifier le lieu',
+            'button' => 'Modifier',
         ]);
     }
 

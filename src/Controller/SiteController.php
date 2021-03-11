@@ -56,9 +56,10 @@ class SiteController extends AbstractController
             return $this->redirectToRoute('site');
         }
 
-        return $this->render('site/site.html.twig', [
+        return $this->render('site/siteAdd.html.twig', [
             'siteForm' => $form->createView(),
             'h1' => 'Ajouter le site',
+            'button' => 'Ajouter',
         ]);
     }
 
@@ -83,9 +84,10 @@ class SiteController extends AbstractController
                 'id' => $site->getId(),
             ]);
         }
-        return $this->render('site/site.html.twig', [
+        return $this->render('site/siteAdd.html.twig', [
             'siteForm' => $form->createView(),
-            'h1' => 'Modifier le site'
+            'h1' => 'Modifier le site',
+            'button' => 'Modifier',
         ]);
     }
 

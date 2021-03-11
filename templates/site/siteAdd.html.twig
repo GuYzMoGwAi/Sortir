@@ -21,18 +21,16 @@
     </div>
 
     <div class="site-form-container">
-        {{ form_start(lieuForm) }}
-        {{ form_row(lieuForm.nom) }}
+        {{ form_start(siteForm) }}
+        {{ form_row(siteForm.nom, {'label': 'Nom du site : '}) }}
         <div class="buttons-ok-no">
             {% if is_granted('ROLE_ADMIN') %}
-                <button type="submit" class="button-submit">Modifier</button>
-                {# <button type="submit" class="button-submit">Ajouter</button> #}
-                {# TODO il y a des choses à voir !! #}
+                <button type="submit" class="button-submit">{{ button }}</button>
             {% elseif is_granted('ROLE_USER') %}
                 <button type="submit" class="button-submit">Ajouter</button>
             {% endif %}
             <a href="{{ path('site') }}" class="button-cancel">Annuler</a>
         </div>
-        {{ form_end(lieuForm) }}
+        {{ form_end(siteForm) }}
     </div>
 {% endblock %}

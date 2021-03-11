@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Site;
+use App\Entity\Sortie;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -113,5 +117,29 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
             'h1' => 'Modification',
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param EntityManager $em
+     * @param $id
+     * @return Response
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @Route ("/admin/user/{id}/delete", name="delete_user")
+     */
+    public function deleteUser($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userRepo = $em->getRepository(Utilisateur::class);
+        $user = $userRepo->find($id);
+        $pseudo = $user->getPseudo();
+        $em->remove($user);
+        $em->flush();
+
+
+        $this->addFlash('success', "L'utilisateur « ".$pseudo." » a bien été supprimé");
+
+        return $this->redirectToRoute('admin');
     }
 }

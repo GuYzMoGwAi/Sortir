@@ -36,8 +36,14 @@
                 <ul>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                        <li><a href="{{ path('update_user') }}" class="logo-user"><img
-                                        src="{{ asset('icons/user.png') }}" alt="logo user"></a></li>
+                        <li><a href="{{ path('update_user') }}" class="logo-user">
+                                {% if (app.user.photoName is defined) and (app.user.photoName is not empty) %}
+                                    <img src="{{ asset('images/users/') }}{{ app.user.photoName }}" class="user-real-img"
+                                         alt="user-image">
+                                {% else %}
+                                    <img src="{{ asset('icons/user.png') }}" class="user-img" alt="user-image">
+                                {% endif %}
+                            </a></li>
                     {% else %}
                         <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
                         <li><a href="{{ path('app_login') }}">Se connecter</a></li>

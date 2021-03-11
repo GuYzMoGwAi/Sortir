@@ -64,7 +64,7 @@ class Utilisateur implements UserInterface
     private $is_active = true;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $photoName;
 

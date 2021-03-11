@@ -65,7 +65,7 @@
                 <div class="colonne-actions">
                     <a href="#"><img src="{{ asset('icons/edit_alt.png') }}" alt="Éditer" class="action-icons"></a>
                     <a href="#"><img src="{{ asset('icons/inactivate.png') }}" alt="Désactiver" class="action-icons"></a>
-                    <a href="#"><img src="{{ asset('icons/delete.png') }}" alt="Supprimer" class="action-icons"></a>
+                    <a href="{{ path('delete_user', {'id': user.id}) }}"><img src="{{ asset('icons/delete.png') }}" alt="Supprimer" class="action-icons" onclick="confirm('Êtes vous sûr de vouloir le détruire ?') || event.preventDefault()"></a>
                 </div>
             </div>
         {% endfor %}

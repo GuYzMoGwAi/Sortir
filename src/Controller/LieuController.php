@@ -94,7 +94,7 @@ class LieuController extends AbstractController
             $em->persist($lieu);
             $em->flush();
 
-            $this->addFlash('success', 'Le lieu a bien été ajouté');
+            $this->addFlash('success', 'Le lieu a bien été modifié');
             return $this->redirectToRoute('lieu', [
                 'id' => $lieu->getId(),
             ]);

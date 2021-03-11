@@ -120,12 +120,8 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @param EntityManager $em
      * @param $id
      * @return Response
-     * @throws ORMException
-     * @throws OptimisticLockException
      * @Route ("/admin/user/{id}/delete", name="delete_user")
      */
     public function deleteUser($id): Response

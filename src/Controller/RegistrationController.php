@@ -2,16 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Site;
-use App\Entity\Sortie;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

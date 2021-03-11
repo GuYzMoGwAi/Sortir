@@ -22,13 +22,13 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('lieu') }}">Gérer les Lieux</a>
                         <a href="{{ path('site') }}">Gérer les sites</a>
+                        <a href="{{ path('ville') }}">Gérer les villes</a>
                         <a class="logo-user logo-admin" href="{{ path('admin') }}"><img
                                     src="{{ asset('icons/pilot.png') }}"
                                     alt="Panneau d'administration"></a>
                     {% elseif is_granted('ROLE_USER') %}
                         <a href="{{ path('lieu') }}">Les lieux</a>
-                        <a href="{{ path('site') }}">Les sites</a>
-
+                        <a href="{{ path('ville') }}">Les villes</a>
                     {% endif %}
                 </a>
             </div>

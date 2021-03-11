@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/ville.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/villeAdd.css') }}">
+{% endblock %}
+
+{% block main %}
+
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-error" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="h1-container">
+        <div class="h1-style">
+            <h1>{{ h1 }}</h1>
+            <div class="h1-underline"></div>
+        </div>
+    </div>
+
+    <div class="ville-form-container">
+        {{ form_start(villeForm) }}
+        {{ form_row(villeForm.nom) }}
+        {{ form_row(villeForm.cp) }}
+        <div class="buttons-ok-no">
+            {% if is_granted('ROLE_ADMIN') %}
+                <button type="submit" class="button-submit">{{ button }}</button>
+            {% elseif is_granted('ROLE_USER') %}
+                <button type="submit" class="button-submit">Ajouter</button>
+            {% endif %}
+            <a href="{{ path('ville') }}" class="button-cancel">Annuler</a>
+        </div>
+        {{ form_end(villeForm) }}
+    </div>
+{% endblock %}

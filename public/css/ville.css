@@ -2,31 +2,31 @@ h3 {
     margin: 1em auto 2em 6em;
 }
 
-filtre-site{
+.filtre-ville{
     margin: 1em auto 2em 6em;
 }
 
-.sites-tablau {
-    width: 30%;
+.ville-tablau {
+    width: 60%;
     margin: 1em auto 2em 6em;
     background-color: #d4d4d4;
     padding: 1em;
     border-radius: .5em;
 }
-.site-ligne {
+.ville-ligne {
     display: flex;
     flex-flow: row nowrap;
     padding: .2em 0;
 }
-.site-ligne div {
+.ville-ligne div {
     padding-left: 2em;
 }
-.site-ligne-entete {
+.ville-ligne-entete {
     height: 2px;
     background: linear-gradient(to right, #cacaca, #23032d, #23032d, #23032d, #23032d, #23032d, #cacaca);
 }
 
-.site-ville a {
+.ville-ville a {
     transition: .5s;
     display: inline-block;
     padding: .5em .7em;
@@ -34,28 +34,33 @@ filtre-site{
     margin-right: .5em;
     border-radius: 50%;
 }
-.site-ville a:hover {
+.ville-ville a:hover {
     transition: .2s;
     background-color: #23032d;
 }
-.site-ville img {
+.ville-ville img {
     width: 1.4em;
     position: relative;
     top: .2em;
 }
 
-.site-ajouter {
+.ville-ajouter {
     display: flex;
     margin-left: 6.5em;
 }
 
-.site-ville {
+.ville-ville {
     padding-right: 5em;
-    width: 50%;
+    width: 25%;
 }
 
-.site-actions {
-    width: 33%;
+.ville-cp {
+    padding-right: 5em;
+    width: 5%;
+}
+
+.ville-actions {
+    width: 25%;
 }
 
 .icon-delete img{
@@ -69,17 +74,4 @@ filtre-site{
 
 .icon-add img {
     width: 2em;
-}
-
-.sortie-liens a{
-    transition: .5s;
-    color: #632079;
-    background-color: #fdfdfd;
-    padding: .1em 1em;
-    border-radius: .2em;
-}
-.sortie-liens a:hover {
-    transition: .2s;
-    color: #fdfdfd;
-    background-color: #632079;
 }

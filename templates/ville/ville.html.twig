@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ville{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ville.css') }}">
+{% endblock %}
+
+
+{% block main %}
+    <div class="h1-container">
+        <div class="h1-style">
+            {% if is_granted('ROLE_ADMIN') %}
+                <h1>Gerer les villes</h1>
+            {% elseif is_granted('ROLE_USER') %}
+                <h1>Les villes</h1>
+            {% endif %}
+            <div class="h1-underline"></div>
+        </div>
+    </div>
+
+    <div class="filtres-container">
+        <h3>Filtrer les villes</h3>
+        <div class="filtres-form">
+            <div class="filtres-search">
+                <div class="filtre-ville" style="margin: 1em auto 2em 6em;">Le nom contient :
+                    <input type="search" id="ville-search" name="q"
+                           aria-label="Search through site content">
+                    <button type="submit">Recherche</button>
+                </div>
+                <div class="ville-tablau">
+                    <div class="ville-ligne">
+                        <div class="ville-ville"><b>Villes</b></div>
+                        <div class="ville-cp"><b>Code postal</b></div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <div class="ville-actions"><b>Actions</b></div>
+                        {% endif %}
+                    </div>
+                    {% for ville in villes %}
+                        <div class="ville-ligne">
+                            <div class="ville-ville ville-ligne-entete"></div>
+                            <div class="ville-cp ville-ligne-entete"></div>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="ville-actions ville-ligne-entete"></div>
+                            {% endif %}
+                        </div>
+                        <div class="ville-ligne">
+                            <div class="ville-ville">{{ ville.nom }}</div>
+                            <div class="ville-cp">{{ ville.cp }}</div>
+                            <div class="ville-actions">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('update_ville', {'id':ville.id}) }}" class="icon-modifier"><img
+                                                src="{{ asset('icons/EditOk.png') }}"
+                                                alt="Modifier" title=" Modifier la ville"></a>
+                                    <a href="{{ path('delete_ville', {'id':ville.id}) }}" class="icon-delete"><img
+                                                src="{{ asset('icons/DeleteOk.png') }}"
+                                                alt="Supprimer" title=" Supprimer la ville"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+        <div class="ville-ajouter">
+            <a href="{{ path('add_ville') }}" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
+                                                                    alt="Ajouter" title="Ajouter une ville"></a>
+        </div>
+
+    </div>
+{% endblock %}

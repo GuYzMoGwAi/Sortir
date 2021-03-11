@@ -77,7 +77,7 @@ class LieuController extends AbstractController
     }
 
     /**
-     * @Route("/modifier/{id}", name="update_lieu")
+     * @Route("/lieu/modifier/{id}", name="update_lieu")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param $lieu
@@ -85,7 +85,6 @@ class LieuController extends AbstractController
      */
     public function lieuUpdate(Request $request, EntityManagerInterface $em, Lieu $lieu): Response
     {
-//        dd($lieu);
         $form = $this->createForm(LieuType::class, $lieu);
         $form->handleRequest($request);
 

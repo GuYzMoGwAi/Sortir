@@ -11,7 +11,11 @@
 {% block main %}
     <div class="h1-container">
         <div class="h1-style">
+            {% if is_granted('ROLE_ADMIN') %}
             <h1>Gerer les lieux</h1>
+            {% elseif is_granted('ROLE_USER') %}
+            <h1>Les lieux</h1>
+            {% endif %}
             <div class="h1-underline"></div>
         </div>
     </div>
@@ -21,7 +25,7 @@
         <div class="filtres-form">
             <div class="filtres-search">
                 <div class="filtre-lieu" style="margin: 1em auto 2em 6em;">Le nom contient :
-                    <input type="search" id="site-search" name="q"
+                    <input type="search" id="lieu-search" name="q"
                            aria-label="Search through site content">
                     <button type="submit">Recherche</button>
                 </div>

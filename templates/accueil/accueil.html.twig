@@ -77,10 +77,10 @@
 
 				<div class="sortie-organisateur">{{ sortie.organisateur }}</div>
 				<div class="sortie-actions sortie-liens">
-{#					{% if sortie.organisateur == app.user.username || is_granted('ROLE_ADMIN') %}#}
+					{% if sortie.organisateur == app.user.username || is_granted('ROLE_ADMIN') %}
 						<a href="{{ path('delete_sortie', {'id':sortie.id}) }}">Supprimer</a>
 						<a href="{{ path('modifier_sortie', {'id':sortie.id}) }}">Modifier</a>
-{#					{% endif %}#}
+					{% endif %}
 					{% for utilisateurSortie in utilisateursSorties%}
 						{% if utilisateurSortie.sortieId == sortie.id %}
 							<a href="#">Se désister</a>
@@ -93,7 +93,6 @@
 			</div>
 		{% endfor %}
 	</div>
-{#	<button><a href="{{ path('nouvelle_sortie') }}">Créer</a></button>#}
 	<a href="{{ path('nouvelle_sortie') }}" class="icon-add" style="margin-left: 8em;"><img src="{{ asset('icons/add_3.png') }}"
 														   alt="Créer" title="Ajouter une sortie" style="width: 2.1em;"></a>
 

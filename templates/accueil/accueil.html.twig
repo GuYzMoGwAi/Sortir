@@ -14,24 +14,24 @@
 		</div>
 	</div>
 
-	<div class="filtres-container">
-		<h3>Filtrer les sorties</h3>
-		<div class="filtres-form">
-			<div class="filtres-search">
-				<div class="filtre-site">Lieu :</div>
-				<div class="filtre-site-combo">
-					<select name="sites" id="sites">
-						<option value="">--Choisissez un lieu--</option>
-						{% for lieu in lieux %}
-							<option value="{{ lieu.id }}">{{ lieu.nom }}</option>
-						{% endfor %}
-					</select>
-				</div>
-			</div>
-			<div class="filtres-checkboxes"></div>
-			<div class="filtres-button-go"></div>
-		</div>
-	</div>
+{#	<div class="filtres-container">#}
+{#		<h3>Filtrer les sorties</h3>#}
+{#		<div class="filtres-form">#}
+{#			<div class="filtres-search">#}
+{#				<div class="filtre-site">Lieu :</div>#}
+{#				<div class="filtre-site-combo">#}
+{#					<select name="sites" id="sites">#}
+{#						<option value="">--Choisissez un lieu--</option>#}
+{#						{% for lieu in lieux %}#}
+{#							<option value="{{ lieu.id }}">{{ lieu.nom }}</option>#}
+{#						{% endfor %}#}
+{#					</select>#}
+{#				</div>#}
+{#			</div>#}
+{#			<div class="filtres-checkboxes"></div>#}
+{#			<div class="filtres-button-go"></div>#}
+{#		</div>#}
+{#	</div>#}
 
 	<div class="sorties-tablau">
 		<div class="sortie-ligne">
@@ -89,6 +89,8 @@
 			</div>
 		{% endfor %}
 	</div>
-	<button><a href="{{ path('nouvelle_sortie') }}">Créer</a></button>
+{#	<button><a href="{{ path('nouvelle_sortie') }}">Créer</a></button>#}
+	<a href="{{ path('nouvelle_sortie') }}" class="icon-add" style="margin-left: 8em;"><img src="{{ asset('icons/add_3.png') }}"
+														   alt="Créer" title="Ajouter une sortie" style="width: 2.5em;"></a>
 
 {% endblock %}

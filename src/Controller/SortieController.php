@@ -31,7 +31,6 @@ class SortieController extends AbstractController
         $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
 
         $sortie = new Sortie();
-        //$sortie = $this->getDoctrine()->getRepository(Sortie::class);
         $form = $this->createForm(SortieType::class, $sortie);
 
         $form->handleRequest($request);
@@ -47,4 +46,30 @@ class SortieController extends AbstractController
             'sortieForm'=> $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/modifierSortie/{idSortie}", name="Modifier Sortie")
+     * @param  int $idSortie
+     * @param Request $request
+     * @return Response
+     */
+    public function editSortie(int $idSortie, Request $request): Response
+    {
+        $sortie = $this->getDoctrine()->getRepository(Sortie::class)->findBy(["id"=>$idSortie]);
+        $form = $this->createForm(SortieType::class, $sortie);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //enregistrement BDD
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            $this->addFlash('success', "Sortie Modifiée");
+        }
+        return $this->render('sortie/creerSortie.html.twig',[
+            'sortieForm'=> $form->createView()
+        ]);
+    }
+
 }

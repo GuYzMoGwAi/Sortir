@@ -38,7 +38,7 @@
 			<div class="sortie-nom"><b>Nom de la sortie</b></div>
 			<div class="sortie-date"><b>Date de sortie</b></div>
 			<div class="sortie-cloture"><b>Date de clôture</b></div>
-			<div class="sortie-inscrits"><b>Inscrits</b></div>
+			<div class="sortie-inscrits"><b>Max Inscrits</b></div>
 			<div class="sortie-etat"><b>État</b></div>
 			<div class="sortie-inscrit"><b>Inscrit</b></div>
 			<div class="sortie-organisateur"><b>Organisateur</b></div>
@@ -58,18 +58,32 @@
 			<div class="sortie-ligne">
 				<div class="sortie-nom"><a href="#"><img src="{{ asset('icons/search.svg') }}"
 														 alt="loupe"></a> {{ sortie.nom }}</div>
-				<div class="sortie-date">{{ sortie.date }}</div>
-				<div class="sortie-cloture">{{ sortie.cloture }}</div>
-				<div class="sortie-inscrits">{{ sortie.inscrits }} / {{ sortie.places }}</div>
+				<div class="sortie-date">{{ sortie.dateHeureDebut.format('d/m/Y H:i') }}</div>
+				<div class="sortie-cloture">{{ sortie.dateCloture.format('d/m/Y H:i') }}</div>
+				<div class="sortie-inscrits"> {{ sortie.nbMaxInscrits }}</div>
 				<div class="sortie-etat">{{ sortie.etat }}</div>
-				<div class="sortie-inscrit">{{ sortie.inscrit ? "X" : "" }}</div>
+				<div class="sortie-inscrit"></div>
+				{% for utilisateurSortie in utilisateursSorties %}
+					{% if utilisateurSortie.sortieId == sortie.id %}
+						<div class="sortie-inscrit">X</div>
+					{% else %}
+						<div class="sortie-inscrit"></div>
+					{% endif %}
+				{% endfor %}
+
 				<div class="sortie-organisateur">{{ sortie.organisateur }}</div>
 				<div class="sortie-actions sortie-liens">
 					{% if sortie.organisateur == userCookie.nom %}
 						<a href="#">Supprimer</a>
+						<a href="modifierSortie/{{ sortie.id }}">Modifier</a>
 					{% endif %}
-					{% if sortie.inscrit %}
-						<a href="#">Se désister</a>
+					{% for utilisateurSortie in utilisateursSorties%}
+						{% if utilisateurSortie.sortieId == sortie.id %}
+							<a href="#">Se désister</a>
+						{% endif %}
+					{% endfor %}
+					{% if sortie.organisateur != userCookie.nom %}
+						<a href="#">M'inscrire</a>
 					{% endif %}
 				</div>
 			</div>

@@ -62,8 +62,6 @@ class SiteController extends AbstractController
             'button' => 'Ajouter',
         ]);
     }
-<<<<<<< HEAD
-=======
 
     /**
      * @Route("/site/modifier/{id}", name="update_site")
@@ -113,5 +111,4 @@ class SiteController extends AbstractController
 
         return $this->redirectToRoute('site');
     }
->>>>>>> master
 }

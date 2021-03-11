@@ -28,7 +28,7 @@
             </div>
             <div class="sites-tablau">
                 <div class="site-ligne">
-                    <div class="site-ville"><b>Villes</b></div>
+                    <div class="site-ville"><b>Site de rattachement</b></div>
                     {% if is_granted('ROLE_ADMIN') %}
                         <div class="site-actions"><b>Actions</b></div>
                     {% endif %}
@@ -44,9 +44,9 @@
                             <div class="site-ville">{{ site.nom }}</div>
                             <div class="site-actions">
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="#" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
+                                    <a href="{{ path('update_site', {'id':site.id}) }}" class="icon-modifier"><img src="{{ asset('icons/EditOk.png') }}"
                                                                            alt="Modifier" title=" Modifier le lieu"></a>
-                                    <a href="#" class="icon-delete"><img src="{{ asset('icons/DeleteOk.png') }}"
+                                    <a href="{{ path('delete_site', {'id':site.id}) }}" class="icon-delete"><img src="{{ asset('icons/DeleteOk.png') }}"
                                                                          alt="Supprimer" title=" Supprimer le lieu"></a>
                                 {% endif %}
                             </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="site-ajouter">
-            <a href="#" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
+            <a href="{{ path('add_site') }}" class="icon-add"><img src="{{ asset('icons/add_3.png') }}"
                                               alt="Ajouter" title="Ajouter un lieu"></a>
         </div>
 

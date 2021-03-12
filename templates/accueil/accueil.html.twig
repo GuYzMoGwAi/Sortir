@@ -87,7 +87,7 @@
                 <div class="sortie-actions sortie-liens">
 
                     {% if isOrganisateur or is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('delete_sortie', {'id':sortie.id}) }}">Supprimer</a>
+                        <a href="{{ path('delete_sortie', {'id':sortie.id}) }}" onclick="confirm('Êtes vous sûr de vouloir supprimer ?') || event.preventDefault()">Supprimer</a>
                         <a href="{{ path('modifier_sortie', {'id':sortie.id}) }}">Modifier</a>
                     {% endif %}
 
@@ -96,7 +96,8 @@
                     {% endif %}
 
                     {% if not isOrganisateur and not isParticipant %}
-                        <a href="{{ path('i') }}">M'inscrire</a>
+{#                        <a href="{{ path('inscrit_toi', {'id':sortie.id, 'user_id':app.user.id}) }}" onclick="confirm('Je m\'inscris ?') || event.preventDefault()">M'inscrire</a>#}
+                        <a href="{{ path('inscrit_toi', {'id':sortie.id, 'user_id':app.user.id}) }}" onclick="confirm('Je m\'inscris ?') || event.preventDefault()">M'inscrire</a>
                     {% endif %}
                 </div>
             </div>

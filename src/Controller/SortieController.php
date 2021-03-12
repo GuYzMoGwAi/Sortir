@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Entity\Utilisateur;
 use App\Form\SortieType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -80,9 +80,11 @@ class SortieController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $sortie = $em->getRepository('App:Sortie')->find($id);
+//        dd($sortie);
 
         if (!$sortie) {
-            $this->addFlash('error', "L'id n'a pas été trouvé");
+            $this->addFlash('error', "La suppression a foiré");
+            return $this->redirectToRoute('accueil');
         }
 
         $em->remove($sortie);
@@ -93,16 +95,45 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @route("/sortie/inscrire", name="inscrire_sortie")
+     * Route("/sortie/supprimer/{id}", name="sortie_supprime")
+     * @param $id
      * @return Response
      */
-    public function newParticipant(): Response
+    public function supprimeSortie($id): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $utilisateur = $this->getUser();
-        $sortie = $em->getRepository('App:Sortie')->findAll();
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+//        dd($sortie);
 
+        if (!$sortie) {
+            $this->addFlash('error', "L'id n'a pas été trouvé");
+            return $this->redirectToRoute('accueil');
+        }
 
+        $em->remove($sortie);
+        $em->flush();
+        $this->addFlash('success', 'La sortie a bien été supprimé');
+
+        return $this->redirectToRoute('accueil');
+    }
+
+    /**
+     * @Route ("/sortie/inscritoi/{id}/user/{user_id}", name="inscrit_toi")
+     * @param $id
+     * @param $user_id
+     * @return Response
+     */
+    public function inscription($id, $user_id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $sortie = $this->getDoctrine()->getRepository(Sortie::class)->find($id);
+        $user = $this->getDoctrine()->getRepository(Utilisateur::class)->find($user_id);
+
+        $sortie->addParticipant($user);
+//        $user->addSorty($sortie);
+//
+//        $em->persist($user);
         $em->persist($sortie);
         $em->flush();
         $this->addFlash('success', 'Vous êtes bien inscrit');

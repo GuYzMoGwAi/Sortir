@@ -19,18 +19,10 @@ class VilleController extends AbstractController
      */
     public function ville(Request $request): Response
     {
-        $ville = new Ville();
         $villes = $this->getDoctrine()->getRepository(Ville::class)->findAll();
-        $form = $this->createForm(VilleType::class, $ville);
-        $form->handleRequest($request);
-
-        if (!$ville && $form) {
-            $this->addFlash('error', 'Erreur il n\'y a pas de ville');
-        }
 
         return $this->render('ville/ville.html.twig', [
             'villes' => $villes,
-            'ville' => $form->createView(),
         ]);
     }
 
@@ -40,7 +32,7 @@ class VilleController extends AbstractController
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function lieuAdd(Request $request, EntityManagerInterface $em): Response
+    public function villeAdd(Request $request, EntityManagerInterface $em): Response
     {
         $ville = new Ville();
         $form = $this->createForm(VilleType::class, $ville);
@@ -55,7 +47,7 @@ class VilleController extends AbstractController
         }
 
 
-        return $this->render('ville/ville.html.twig', [
+        return $this->render('ville/villeAdd.html.twig', [
             'villeForm' => $form->createView(),
             'h1' => 'Ajouter la ville',
             'button' => 'Ajouter',
@@ -69,7 +61,7 @@ class VilleController extends AbstractController
      * @param Ville $ville
      * @return Response
      */
-    public function lieuUpdate(Request $request, EntityManagerInterface $em, Ville $ville): Response
+    public function villeUpdate(Request $request, EntityManagerInterface $em, Ville $ville): Response
     {
         $form = $this->createForm(VilleType::class, $ville);
         $form->handleRequest($request);
@@ -83,7 +75,7 @@ class VilleController extends AbstractController
                 'id' => $ville->getId(),
             ]);
         }
-        return $this->render('ville/ville.html.twig', [
+        return $this->render('ville/villeAdd.html.twig', [
             'villeForm' => $form->createView(),
             'h1' => 'Modifier la ville',
             'button' => 'Modifier',
@@ -96,7 +88,7 @@ class VilleController extends AbstractController
      * @param $id
      * @return Response
      */
-    public function lieuDelete(EntityManagerInterface $em, $id): Response
+    public function villeDelete(EntityManagerInterface $em, $id): Response
     {
         $em = $this->getDoctrine()->getManager();
         $ville = $em->getRepository('App:Ville')->find($id);

@@ -89,20 +89,21 @@ class Utilisateur implements UserInterface
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
-     */
-    private $sorties;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="utilisateurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $site;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
+     */
+    private $sorties;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -227,37 +228,6 @@ class Utilisateur implements UserInterface
         $this->email = $email;
     }
 
-
-    /**
-     * @return Collection|Sortie[]
-     */
-    public function getSorties(): Collection
-    {
-        return $this->sorties;
-    }
-
-//    public function addSorty(Sortie $sorty): self
-//    {
-//        if (!$this->sorties->contains($sorty)) {
-//            $this->sorties[] = $sorty;
-//            $sorty->setOrganisateur(Utilisateur::class);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeSorty(Sortie $sorty): self
-//    {
-//        if ($this->sorties->removeElement($sorty)) {
-//            // set the owning side to null (unless already changed)
-//            if ($sorty->getOrganisateur() === $this) {
-//                $sorty->setOrganisateur(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-
     public function getSite(): ?Site
     {
         return $this->site;
@@ -280,16 +250,44 @@ class Utilisateur implements UserInterface
 
     /**
      * @param mixed $photoName
+     * @return Utilisateur
      */
-    public function setPhotoName($photoName)
+    public function setPhotoName($photoName): Utilisateur
     {
         $this->photoName = $photoName;
         return $this;
     }
 
 
-public function __toString()
-{
-    return $this->nom;
-}
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSorties(): Collection
+    {
+        return $this->sorties;
+    }
+
+    public function addSorty(Sortie $sorty): self
+    {
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties[] = $sorty;
+            $sorty->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSorty(Sortie $sorty): self
+    {
+        if ($this->sorties->removeElement($sorty)) {
+            $sorty->removeParticipant($this);
+        }
+
+        return $this;
+    }
 }

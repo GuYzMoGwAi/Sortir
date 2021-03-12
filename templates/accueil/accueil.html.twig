@@ -45,7 +45,18 @@
             <div class="sortie-organisateur"><b>Organisateur</b></div>
             <div class="sortie-actions"><b>Actions</b></div>
         </div>
+        {% set isOrganisateur, isParticipant = false, false %}
         {% for sortie in sorties %}
+            {% if sortie.organisateur.pseudo == app.user.pseudo %}
+                {% set isOrganisateur = true %}
+            {% else %}
+                {% set isOrganisateur = false %}
+            {% endif %}
+            {% for participant in sortie.participants %}
+                {% if participant.pseudo == app.user.pseudo %}
+                    {% set isParticipant = true %}
+                {% endif %}
+            {% endfor %}
             <div class="sortie-ligne">
                 <div class="sortie-nom sortie-ligne-entete"></div>
                 <div class="sortie-ville sortie-ligne-entete"></div>
@@ -65,30 +76,27 @@
                 <div class="sortie-cloture">{{ sortie.dateCloture.format('d/m/Y H:i') }}</div>
                 <div class="sortie-inscrits"> {{ sortie.nbMaxInscrits }}</div>
                 <div class="sortie-etat">{{ sortie.etat }}</div>
-                <div class="sortie-inscrit"></div>
-                {% for utilisateurSortie in utilisateursSorties %}
-{#                    {% if utilisateurSortie.sortieId == sortie.id %}#}
-{#                        <div class="sortie-inscrit">X</div>#}
-{#                    {% else %}#}
-{#                        <div class="sortie-inscrit"></div>#}
-{#                    {% endif %}#}
-                {% endfor %}
+                <div class="sortie-inscrit">
 
-                <div class="sortie-organisateur">{{ sortie.organisateur }}</div>
-                <div class="sortie-actions sortie-liens">
-                    {% if (sortie.organisateur is defined) %}
-                        {% if sortie.organisateur == app.user.username or is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('delete_sortie', {'id':sortie.id}) }}">Supprimer</a>
-                            <a href="{{ path('modifier_sortie', {'id':sortie.id}) }}">Modifier</a>
-                        {% endif %}
+                    {% if isParticipant or isOrganisateur %}
+                        <img src="{{ asset('icons/check.png') }}" alt="X" style="width: 2em;">
                     {% endif %}
-                    {% for utilisateurSortie in utilisateursSorties %}
-{#                        {% if utilisateurSortie.sortieId == sortie.id %}#}
-{#                            <a href="#">Se désister</a>#}
-{#                        {% endif %}#}
-                    {% endfor %}
-                    {% if sortie.organisateur != userCookie.nom %}
-                        <a href="#">M'inscrire</a>
+                </div>
+
+                <div class="sortie-organisateur">{{ sortie.organisateur.pseudo }}</div>
+                <div class="sortie-actions sortie-liens">
+
+                    {% if isOrganisateur or is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('delete_sortie', {'id':sortie.id}) }}">Supprimer</a>
+                        <a href="{{ path('modifier_sortie', {'id':sortie.id}) }}">Modifier</a>
+                    {% endif %}
+
+                    {% if isParticipant %}
+                        <a href="#">Se désister</a>
+                    {% endif %}
+
+                    {% if not isOrganisateur and not isParticipant %}
+                        <a href="{{ path('i') }}">M'inscrire</a>
                     {% endif %}
                 </div>
             </div>

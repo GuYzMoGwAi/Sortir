@@ -2,18 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Lieu;
 use App\Entity\Sortie;
-use App\Form\LieuType;
 use App\Form\SortieType;
-use Doctrine\DBAL\Types\ArrayType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,11 +45,10 @@ class SortieController extends AbstractController
     /**
      * @Route("/modifierSortie/{id}", name="modifier_sortie")
      * @param Request $request
-     * @param EntityManagerInterface $em
      * @param Sortie $sortie
      * @return Response
      */
-    public function editSortie(Request $request, EntityManagerInterface $em, Sortie $sortie): Response
+    public function editSortie(Request $request, Sortie $sortie): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
@@ -85,18 +76,36 @@ class SortieController extends AbstractController
      * @param $id
      * @return Response
      */
-    public function sortieDelete( $id): Response
+    public function sortieDelete($id): Response
     {
         $em = $this->getDoctrine()->getManager();
         $sortie = $em->getRepository('App:Sortie')->find($id);
 
         if (!$sortie) {
-            $this->addFlash('error',"L'id n'a pas été trouvé");
+            $this->addFlash('error', "L'id n'a pas été trouvé");
         }
-        
+
         $em->remove($sortie);
         $em->flush();
-        $this->addFlash('success','La sortie a bien été supprimé');
+        $this->addFlash('success', 'La sortie a bien été supprimé');
+
+        return $this->redirectToRoute('accueil');
+    }
+
+    /**
+     * @route("/sortie/inscrire", name="inscrire_sortie")
+     * @return Response
+     */
+    public function newParticipant(): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $utilisateur = $this->getUser();
+        $sortie = $em->getRepository('App:Sortie')->findAll();
+
+
+        $em->persist($sortie);
+        $em->flush();
+        $this->addFlash('success', 'Vous êtes bien inscrit');
 
         return $this->redirectToRoute('accueil');
     }

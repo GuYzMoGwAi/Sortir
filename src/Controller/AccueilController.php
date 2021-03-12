@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Lieu;
 use App\Entity\Sortie;
-use App\Entity\SortieUtilisateur;
-use App\Entity\Utilisateur;
+//use App\Entity\SortieUtilisateur;
+//use App\Entity\Utilisateur;
 use App\Entity\Ville;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class AccueilController extends AbstractController
     public function accueil(): Response
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $utilisateursSorties = $this->getDoctrine()->getRepository(SortieUtilisateur::class)->findBy(["utilisateur_id"=>$user->getId()]);
+//        $utilisateursSorties = $this->getDoctrine()->getRepository(SortieUtilisateur::class)->findBy(["utilisateur_id"=>$user->getId()]);
         //$userSorties = $this->getDoctrine()->getRepository(SortieUtilisateur::class)->findAll();
         $sorties = $this->getDoctrine()->getRepository(Sortie::class)->findAll();
         $villes = $this->getDoctrine()->getRepository(Ville::class)->findAll();
@@ -31,7 +31,7 @@ class AccueilController extends AbstractController
             'userCookie' => $user,
             'sorties' => $sorties,
             //'userSorties'=> $userSorties,
-            'utilisateursSorties'=> $utilisateursSorties
+//            'utilisateursSorties'=> $utilisateursSorties
         ]);
     }
 }

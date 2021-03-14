@@ -49,4 +49,6 @@ security:
         - { path: /site, roles: ROLE_ADMIN }
         - { path: /site/modifier, roles: ROLE_ADMIN }
         - { path: /site/supprimer, roles: ROLE_ADMIN }
+        - { path: /admin, roles: ROLE_ADMIN }
+        - { path: /accueil, roles: ROLE_USER }
         - { path: ^/profil, roles: ROLE_USER }

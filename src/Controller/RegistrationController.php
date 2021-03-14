@@ -71,17 +71,19 @@ class RegistrationController extends AbstractController
             'h1' => 'Inscription',
         ]);
     }
+
     /**
-     * @Route("/gestion_compte", name="update_user")
+     * @Route("/gestion_compte/{id}", name="update_user")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param AppAuthenticator $authenticator
+     * @param $id
      * @return Response
      */
-    public function editUser(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
+    public function editUser(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator, $id): Response
     {
-        $user = $this->getUser();
+        $user = $this->getDoctrine()->getRepository(Utilisateur::class)->find($id);
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -115,7 +117,9 @@ class RegistrationController extends AbstractController
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
+
             );
+            return$this->redirectToRoute('admin');
         }
         return $this->render('registration/register.html.twig',[
             'registrationForm' => $form->createView(),

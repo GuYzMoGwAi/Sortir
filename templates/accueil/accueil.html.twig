@@ -55,6 +55,8 @@
             {% for participant in sortie.participants %}
                 {% if participant.pseudo == app.user.pseudo %}
                     {% set isParticipant = true %}
+                    {% else %}
+                    {% set isParticipant = false %}
                 {% endif %}
             {% endfor %}
             <div class="sortie-ligne">

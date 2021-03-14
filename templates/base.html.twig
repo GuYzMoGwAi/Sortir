@@ -36,7 +36,7 @@
                 <ul>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                        <li><a href="{{ path('update_user') }}" class="logo-user">
+                        <li><a href="{{ path('update_user', {'id':app.user.id}) }}" class="logo-user">
                                 {% if (app.user.photoName is defined) and (app.user.photoName is not empty) %}
                                     <img src="{{ asset('images/users/') }}{{ app.user.photoName }}" class="user-real-img"
                                          alt="user-image">

@@ -55,7 +55,7 @@
             {% for participant in sortie.participants %}
                 {% if participant.pseudo == app.user.pseudo %}
                     {% set isParticipant = true %}
-                    {% else %}
+                {% else %}
                     {% set isParticipant = false %}
                 {% endif %}
             {% endfor %}
@@ -82,6 +82,8 @@
 
                     {% if isParticipant or isOrganisateur %}
                         <img src="{{ asset('icons/check.png') }}" alt="X" style="width: 2em;">
+                    {% else %}
+                        <div>Non inscrit</div>
                     {% endif %}
                 </div>
 
@@ -89,17 +91,18 @@
                 <div class="sortie-actions sortie-liens">
 
                     {% if isOrganisateur or is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('delete_sortie', {'id':sortie.id}) }}" onclick="confirm('Êtes vous sûr de vouloir supprimer ?') || event.preventDefault()">Supprimer</a>
+                        <a href="{{ path('delete_sortie', {'id':sortie.id}) }}"
+                           onclick="confirm('Êtes vous sûr de vouloir supprimer ?') || event.preventDefault()">Supprimer</a>
                         <a href="{{ path('modifier_sortie', {'id':sortie.id}) }}">Modifier</a>
                     {% endif %}
 
-                    {% if isParticipant %}
+                    {% if isParticipant and not isOrganisateur %}
                         <a href="#">Se désister</a>
                     {% endif %}
 
                     {% if not isOrganisateur and not isParticipant %}
-{#                        <a href="{{ path('inscrit_toi', {'id':sortie.id, 'user_id':app.user.id}) }}" onclick="confirm('Je m\'inscris ?') || event.preventDefault()">M'inscrire</a>#}
-                        <a href="{{ path('inscrit_toi', {'id':sortie.id, 'user_id':app.user.id}) }}" onclick="confirm('Je m\'inscris ?') || event.preventDefault()">M'inscrire</a>
+                        <a href="{{ path('inscrit_toi', {'id':sortie.id, 'user_id':app.user.id}) }}"
+                           onclick="confirm('Êtes vous sûr de vouloir inscrire ?') || event.preventDefault()">M'inscrire</a>
                     {% endif %}
                 </div>
             </div>

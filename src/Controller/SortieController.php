@@ -43,23 +43,15 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @route("/detail/{id}", name="detail_sortie", requirements={"id":"\d+"}, methods={"GET"})
-     * @param $id
-     * @param Request $request
+     * @route("/accueil/detail/{id}", name="detail_sortie", methods={"GET"})
+     * @param Sortie $sortie
+     * @return Response
      */
-    public function detail($id, Request $request)
+    public function detail(Sortie $sortie): Response
     {
-        $sortieRepos = $this->$this->getDoctrine()->getRepository(Sortie::class);
-        $sortie = $sortieRepos->find($id);
-
-        if (empty($sortie)) {
-            throw $this->createNotFoundException("Les détails de cette sortie n'existe pas");
-        }
-
         return $this->render('sortie/detailSortie.html.twig', [
             "sortie" => $sortie,
         ]);
-
     }
 
     /**

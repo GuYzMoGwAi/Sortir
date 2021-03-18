@@ -7,7 +7,7 @@ h3 {
 }
 
 .ville-tablau {
-    width: 60%;
+    width: 30%;
     margin: 1em auto 2em 6em;
     background-color: #d4d4d4;
     padding: 1em;
@@ -51,12 +51,12 @@ h3 {
 
 .ville-ville {
     padding-right: 5em;
-    width: 25%;
+    width: 50%;
 }
 
 .ville-cp {
     padding-right: 5em;
-    width: 5%;
+    width: 25%;
 }
 
 .ville-actions {
